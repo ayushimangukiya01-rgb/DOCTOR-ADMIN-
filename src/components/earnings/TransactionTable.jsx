@@ -1,5 +1,8 @@
 import React from "react";
 import TransactionRow from "./TransactionRow";
+import TableContainer from "../../common/layout/TableContainer";
+import TransactionHeaderCell from "../../common/display/TransactionHeaderCell";
+import TableIconPager from "../../common/ui/TableIconPager";
 
 const transactions = [
   {
@@ -54,7 +57,7 @@ const transactions = [
 
 const TransactionTable = () => {
   return (
-    <section className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)] border border-slate-100 overflow-hidden">
+    <TableContainer>
       <div className="px-4 sm:px-6 lg:px-8 py-5 sm:py-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-b border-slate-50">
         <h3 className="font-manrope text-[20px] leading-[28px] font-semibold text-slate-900">
           Recent Transactions
@@ -68,26 +71,17 @@ const TransactionTable = () => {
 
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] text-left">
-          <thead>
-            <tr className="bg-slate-50/50">
-              <th className="px-8 py-4 text-[12px] leading-[16px] tracking-[0.05em] font-semibold uppercase text-slate-500">
-                Date
-              </th>
-              <th className="px-8 py-4 text-[12px] leading-[16px] tracking-[0.05em] font-semibold uppercase text-slate-500">
-                Patient
-              </th>
-              <th className="px-8 py-4 text-[12px] leading-[16px] tracking-[0.05em] font-semibold uppercase text-slate-500">
-                Reference ID
-              </th>
-              <th className="px-8 py-4 text-[12px] leading-[16px] tracking-[0.05em] font-semibold uppercase text-slate-500">
-                Amount
-              </th>
-              <th className="px-8 py-4 text-[12px] leading-[16px] tracking-[0.05em] font-semibold uppercase text-slate-500">
-                Status
-              </th>
-              <th className="px-8 py-4"></th>
-            </tr>
-          </thead>
+         <thead>
+  <tr className="bg-slate-50/50">
+    <TransactionHeaderCell>Patient</TransactionHeaderCell>
+
+    <TransactionHeaderCell>Date</TransactionHeaderCell>
+    <TransactionHeaderCell>Reference ID</TransactionHeaderCell>
+    <TransactionHeaderCell>Amount</TransactionHeaderCell>
+    <TransactionHeaderCell>Status</TransactionHeaderCell>
+    <th className="px-8 py-4"></th>
+  </tr>
+</thead>
 
           <tbody className="divide-y divide-slate-50">
             {transactions.map((transaction) => (
@@ -105,21 +99,9 @@ const TransactionTable = () => {
           Showing 1-10 of 142 transactions
         </p>
 
-        <div className="flex gap-2">
-          <button className="p-1 rounded border border-slate-200 text-slate-400 hover:bg-white transition-colors">
-            <span className="material-symbols-outlined text-sm">
-              chevron_left
-            </span>
-          </button>
-
-          <button className="p-1 rounded border border-slate-200 text-slate-400 hover:bg-white transition-colors">
-            <span className="material-symbols-outlined text-sm">
-              chevron_right
-            </span>
-          </button>
-        </div>
+        <TableIconPager />
       </div>
-    </section>
+    </TableContainer>
   );
 };
 

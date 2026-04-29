@@ -1,6 +1,8 @@
 import React from "react";
 import PatientRow from "./PatientRow";
 import PatientMobileCard from "./PatientMobileCard";
+import PatientTableHeaderCell from "../../common/display/PatientTableHeaderCell";
+import PaginationButton from "../../common/ui/PaginationButton";
 
 const patients = [
   {
@@ -65,17 +67,17 @@ const patients = [
   },
 ];
 
-const PatientsTable = () => {
-  const tableHeaders = [
-    "Patient",
-    "Age / Gender",
-    "Contact",
-    "Last Visit",
-    "Condition",
-    "Status",
-    "Action",
-  ];
+const tableHeaders = [
+  "Patient",
+  "Age / Gender",
+  "Contact",
+  "Last Visit",
+  "Condition",
+  "Status",
+  "Action",
+];
 
+const PatientsTable = () => {
   return (
     <div className="bg-white rounded-b-xl border border-slate-100 shadow-[0px_4px_12px_rgba(15,23,42,0.05)] overflow-hidden">
       <div className="hidden lg:block overflow-x-auto">
@@ -83,14 +85,12 @@ const PatientsTable = () => {
           <thead>
             <tr className="border-b border-slate-100 bg-white">
               {tableHeaders.map((head) => (
-                <th
+                <PatientTableHeaderCell
                   key={head}
-                  className={`px-5 py-4 text-[13px] font-semibold text-slate-500 ${
-                    head === "Action" ? "text-center" : "text-left"
-                  }`}
+                  align={head === "Action" ? "center" : "left"}
                 >
                   {head}
-                </th>
+                </PatientTableHeaderCell>
               ))}
             </tr>
           </thead>
@@ -115,25 +115,11 @@ const PatientsTable = () => {
         </p>
 
         <div className="flex items-center gap-2">
-          <button className="w-9 h-9 rounded-lg border border-slate-200 text-slate-400">
-            ‹
-          </button>
-
-          <button className="w-9 h-9 rounded-lg border border-[#004ac6] text-[#004ac6] font-semibold">
-            1
-          </button>
-
-          <button className="w-9 h-9 rounded-lg border border-slate-200 text-slate-600">
-            2
-          </button>
-
-          <button className="w-9 h-9 rounded-lg border border-slate-200 text-slate-600">
-            3
-          </button>
-
-          <button className="w-9 h-9 rounded-lg border border-slate-200 text-slate-600">
-            ›
-          </button>
+          <PaginationButton icon>‹</PaginationButton>
+          <PaginationButton active>1</PaginationButton>
+          <PaginationButton>2</PaginationButton>
+          <PaginationButton>3</PaginationButton>
+          <PaginationButton>›</PaginationButton>
         </div>
       </div>
     </div>

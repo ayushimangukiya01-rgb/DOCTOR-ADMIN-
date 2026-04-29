@@ -47,7 +47,7 @@ const PracticeDetails = () => {
         <div className="relative h-32 rounded-lg overflow-hidden">
           
           <img
-            src="https://maps.googleapis.com/maps/api/staticmap?center=San+Francisco&zoom=13&size=600x300&maptype=roadmap"
+            src="https://m.media-amazon.com/images/I/915m1TpYvfL._AC_SL1334_.jpg"
             alt="map"
             className="w-full h-full object-cover opacity-60"
           />

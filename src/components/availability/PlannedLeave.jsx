@@ -1,8 +1,10 @@
 import React from "react";
+import CardContainer from "../../common/layout/CardContainer";
+import AlertInfoRow from "../../common/display/AlertInfoRow";
 
 const PlannedLeave = () => {
   return (
-    <section className="bg-white p-6 rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)]">
+    <CardContainer className="p-6">
       <h2 className="text-[20px] leading-[28px] font-semibold text-slate-900 mb-4 font-['Manrope']">
         Planned Leave
       </h2>
@@ -19,22 +21,17 @@ const PlannedLeave = () => {
           </button>
         </div>
 
-        <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg text-[#ba1a1a]">
-          <span className="material-symbols-outlined text-xl">
-            event_busy
-          </span>
-
-          <div className="flex-1">
-            <p className="text-sm font-bold">Oct 12 - Oct 15</p>
-            <p className="text-xs">Annual Conference</p>
-          </div>
-
+        <AlertInfoRow
+          icon="event_busy"
+          title="Oct 12 - Oct 15"
+          subtitle="Annual Conference"
+        >
           <button className="material-symbols-outlined text-sm opacity-60 hover:opacity-100">
             close
           </button>
-        </div>
+        </AlertInfoRow>
       </div>
-    </section>
+    </CardContainer>
   );
 };
 

@@ -1,22 +1,16 @@
 import React from "react";
+import SectionHeader from "../../common/typography/SectionHeader";
+import FormLabel from "../../common/ui/FormLabel";
 
 const AboutMe = () => {
   return (
     <section className="bg-white rounded-xl p-6 xl:p-8 border border-slate-100 shadow-[0px_4px_12px_rgba(15,23,42,0.05)]">
-      <div className="flex items-center gap-2 mb-6 border-b border-slate-50 pb-2">
-        <span className="material-symbols-outlined text-[#004ac6]">
-          description
-        </span>
-
-        <h3 className="font-['Manrope'] text-[20px] leading-[28px] font-semibold text-[#191b23]">
-          About Me
-        </h3>
+      <div className="border-b border-slate-50 pb-2 mb-1">
+        <SectionHeader icon="description" title="About Me" />
       </div>
 
-      <div className="space-y-1">
-        <label className="text-[12px] leading-[16px] tracking-[0.05em] font-semibold text-[#434655] uppercase">
-          Biography
-        </label>
+      <div className="space-y-3">
+        <FormLabel>Biography</FormLabel>
 
         <textarea
           rows="6"

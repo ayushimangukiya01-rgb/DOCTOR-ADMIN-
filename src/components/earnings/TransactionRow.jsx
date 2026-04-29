@@ -1,30 +1,24 @@
 import React from "react";
+import TransactionUserCell from "../../common/display/TransactionUserCell";
+import StatusBadgeOutline from "../../common/display/StatusBadgeOutline";
 
 const TransactionRow = ({ transaction }) => {
   return (
     <tr className="hover:bg-slate-50/30 transition-colors group">
+      <td className="px-8 py-5">
+        <TransactionUserCell
+          initials={transaction.initials}
+          avatarBg={transaction.avatarBg}
+          avatarText={transaction.avatarText}
+          name={transaction.patient}
+          subtitle={transaction.type}
+        />
+      </td>
       <td className="px-8 py-5 text-sm text-slate-600">
         {transaction.date}
       </td>
 
-      <td className="px-8 py-5">
-        <div className="flex items-center gap-3">
-          <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold ${transaction.avatarBg} ${transaction.avatarText}`}
-          >
-            {transaction.initials}
-          </div>
-
-          <div>
-            <p className="text-sm font-semibold text-slate-900">
-              {transaction.patient}
-            </p>
-            <p className="text-xs text-slate-500">
-              {transaction.type}
-            </p>
-          </div>
-        </div>
-      </td>
+      
 
       <td className="px-8 py-5 text-sm text-slate-400 font-mono">
         {transaction.reference}
@@ -35,11 +29,10 @@ const TransactionRow = ({ transaction }) => {
       </td>
 
       <td className="px-8 py-5">
-        <span
-          className={`px-3 py-1 rounded-full text-[10px] font-bold border ${transaction.statusClass}`}
-        >
-          {transaction.status}
-        </span>
+        <StatusBadgeOutline
+          text={transaction.status}
+          className={transaction.statusClass}
+        />
       </td>
 
       <td className="px-8 py-5 text-right">
@@ -47,6 +40,7 @@ const TransactionRow = ({ transaction }) => {
           more_vert
         </button>
       </td>
+
     </tr>
   );
 };

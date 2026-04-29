@@ -1,10 +1,10 @@
 import React from "react";
 import DaySchedule from "./DaySchedule";
+import DayStatusLabel from "../../common/display/DayStatusLabel";
 
 const WeeklySchedule = () => {
   return (
-    <div className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)] overflow-hidden flex flex-col h-full">
-      
+    <div className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)] overflow-hidden flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -26,8 +26,7 @@ const WeeklySchedule = () => {
       </div>
 
       {/* Body */}
-      <div className="p-6 space-y-8 max-h-[700px] overflow-y-auto">
-        
+      <div className="p-6 space-y-8 flex-1 overflow-y-auto">
         <DaySchedule
           day="Monday"
           slots={[
@@ -39,30 +38,17 @@ const WeeklySchedule = () => {
 
         <DaySchedule
           day="Tuesday"
-          slots={[
-            { start: "08:00", end: "12:00", type: "" },
-          ]}
+          slots={[{ start: "08:00", end: "12:00", type: "" }]}
         />
 
         <DaySchedule
           day="Wednesday"
-          slots={[
-            { start: "09:00", end: "17:00", type: "" },
-          ]}
+          slots={[{ start: "09:00", end: "17:00", type: "" }]}
         />
 
         {/* Thursday Empty */}
         <div className="flex flex-col md:flex-row gap-6 pb-6 border-b border-slate-50">
-          
-          <div className="w-32 pt-2">
-            <span className="font-bold text-slate-900">
-              Thursday
-            </span>
-
-            <div className="text-xs text-[#006e2f] mt-1 font-semibold uppercase tracking-wider">
-              Active
-            </div>
-          </div>
+          <DayStatusLabel day="Thursday" status="Active" />
 
           <div className="flex-1 text-center py-4 bg-slate-50/50 border border-dashed border-slate-200 rounded-xl">
             <span className="text-slate-400 text-sm">
@@ -73,16 +59,12 @@ const WeeklySchedule = () => {
               Create standard 9-5 schedule?
             </button>
           </div>
-
         </div>
-
       </div>
 
-      {/* Footer */}
-      <div className="p-6 bg-slate-50/50 flex items-center justify-between">
-        
+      {/* Footer - fixed at bottom */}
+      <div className="p-6 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-auto">
         <div className="flex -space-x-2">
-          
           <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
             <img
               src="https://randomuser.me/api/portraits/women/44.jpg"
@@ -98,13 +80,11 @@ const WeeklySchedule = () => {
               alt=""
             />
           </div>
-
         </div>
 
         <p className="text-xs text-slate-500 font-medium">
           Schedule also affects your assistant&apos;s view
         </p>
-
       </div>
     </div>
   );

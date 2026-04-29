@@ -1,65 +1,47 @@
 import React from "react";
+import SectionHeader from "../../common/typography/SectionHeader";
+import FormLabel from "../../common/ui/FormLabel";
+import InputField from "../../common/ui/InputField";
+import FormSelect from "../../common/ui/FormSelect";
 
 const MedicationPlan = () => {
   return (
     <section className="bg-white rounded-xl border border-slate-100 medical-shadow overflow-hidden">
-      
-      {/* Header */}
       <div className="p-5 sm:p-6 border-b border-slate-100 bg-slate-50/50">
-        <h2 className="font-manrope text-[20px] sm:text-[22px] font-semibold text-slate-900 flex items-center gap-2">
-          <span className="material-symbols-outlined text-[#004ac6]">
-            pill
-          </span>
-          Medication Plan
-        </h2>
+        <SectionHeader icon="pill" title="Medication Plan" />
       </div>
 
       <div className="p-5 sm:p-6 space-y-6">
-        
-        {/* FORM (same grid, responsive added) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-6 items-end">
-          
-          {/* Medicine */}
           <div className="lg:col-span-4 space-y-1">
-            <label className="text-[12px] font-semibold text-slate-500 uppercase">
-              Medicine Name
-            </label>
+            <FormLabel>Medicine Name</FormLabel>
 
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-sm">
                 search
               </span>
 
-              <input
-                type="text"
+              <InputField
                 placeholder="Search drug database..."
-                className="w-full pl-10 h-11 rounded-lg border border-[#c3c6d7] focus:border-[#004ac6] focus:ring-1 focus:ring-[#004ac6] outline-none"
+                className="pl-10"
               />
             </div>
           </div>
 
-          {/* Dosage */}
           <div className="lg:col-span-2 space-y-1">
-            <label className="text-[12px] font-semibold text-slate-500 uppercase">
-              Dosage
-            </label>
-
-            <input
-              type="text"
-              placeholder="500mg"
-              className="w-full h-11 rounded-lg border border-[#c3c6d7] focus:border-[#004ac6] focus:ring-1 focus:ring-[#004ac6] outline-none"
-            />
+            <FormLabel>Dosage</FormLabel>
+            <InputField placeholder="500mg" />
           </div>
 
-          {/* Frequency */}
           <div className="lg:col-span-3 space-y-1">
-            <label className="text-[12px] font-semibold text-slate-500 uppercase">
-              Frequency
-            </label>
+            <FormLabel>Frequency</FormLabel>
 
             <div className="flex items-center gap-3 h-11 border border-[#c3c6d7] rounded-lg px-3">
               {["MOR", "AFT", "NIT"].map((item) => (
-                <label key={item} className="flex items-center gap-1 text-xs font-semibold">
+                <label
+                  key={item}
+                  className="flex items-center gap-1 text-xs font-semibold"
+                >
                   <input type="checkbox" className="accent-[#004ac6]" />
                   {item}
                 </label>
@@ -67,53 +49,36 @@ const MedicationPlan = () => {
             </div>
           </div>
 
-          {/* Meal */}
           <div className="lg:col-span-3 space-y-1">
-            <label className="text-[12px] font-semibold text-slate-500 uppercase">
-              Meal Instruction
-            </label>
+            <FormLabel>Meal Instruction</FormLabel>
 
-            <select className="w-full h-11 rounded-lg border border-[#c3c6d7] focus:border-[#004ac6] focus:ring-1 focus:ring-[#004ac6] outline-none">
-              <option>After Food</option>
-              <option>Before Food</option>
-              <option>Empty Stomach</option>
-            </select>
-          </div>
-
-          {/* Duration */}
-          <div className="lg:col-span-3 space-y-1">
-            <label className="text-[12px] font-semibold text-slate-500 uppercase">
-              Duration
-            </label>
-
-            <div className="flex gap-2">
-              <input
-                type="number"
-                defaultValue="5"
-                className="w-16 h-11 rounded-lg border border-[#c3c6d7]"
-              />
-
-              <select className="flex-1 h-11 rounded-lg border border-[#c3c6d7]">
-                <option>Days</option>
-                <option>Weeks</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Quantity */}
-          <div className="lg:col-span-3 space-y-1">
-            <label className="text-[12px] font-semibold text-slate-500 uppercase">
-              Quantity
-            </label>
-
-            <input
-              type="text"
-              placeholder="10 Tablets"
-              className="w-full h-11 rounded-lg border border-[#c3c6d7]"
+            <FormSelect
+              options={["After Food", "Before Food", "Empty Stomach"]}
             />
           </div>
 
-          {/* Add Button */}
+          <div className="lg:col-span-3 space-y-1">
+            <FormLabel>Duration</FormLabel>
+
+           <div className="flex gap-2">
+  <InputField
+    type="number"
+    defaultValue="5"
+    className="flex-1"
+  />
+
+  <FormSelect
+    options={["Days", "Weeks"]}
+    className="w-28"
+  />
+</div>
+          </div>
+
+          <div className="lg:col-span-3 space-y-1">
+            <FormLabel>Quantity</FormLabel>
+            <InputField placeholder="10 Tablets" />
+          </div>
+
           <div className="lg:col-span-6">
             <button className="w-full h-11 flex items-center justify-center gap-2 border-2 border-dashed border-[#004ac6]/30 text-[#004ac6] font-medium bg-blue-50/50 hover:bg-blue-50 transition rounded-lg">
               <span className="material-symbols-outlined">add_circle</span>
@@ -122,7 +87,6 @@ const MedicationPlan = () => {
           </div>
         </div>
 
-        {/* TABLE (same design) */}
         <div className="overflow-x-auto border border-slate-100 rounded-lg">
           <table className="w-full min-w-[700px] text-left">
             <thead>
@@ -180,7 +144,6 @@ const MedicationPlan = () => {
             </tbody>
           </table>
         </div>
-
       </div>
     </section>
   );

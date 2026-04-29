@@ -1,12 +1,8 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
-
-const navItemClass = ({ isActive }) =>
-  `flex items-center gap-3 px-6 py-3 font-manrope text-sm font-semibold tracking-tight transition-all duration-200 ease-in-out ${
-    isActive
-      ? "bg-blue-50 text-blue-700 border-r-4 border-blue-600"
-      : "text-slate-500 hover:bg-slate-50 hover:text-blue-600"
-  }`;
+import { useLocation } from "react-router-dom";
+import SidebarLogo from "../../common/display/SidebarLogo";
+import SidebarNavItem from "../../common/ui/SidebarNavItem";
+import SidebarLogoutItem from "../../common/ui/SidebarLogoutItem";
 
 const SidebarContent = ({ onClose }) => {
   const location = useLocation();
@@ -15,81 +11,51 @@ const SidebarContent = ({ onClose }) => {
     location.pathname === "/appointments" ||
     location.pathname === "/appointment-detail";
 
-  const appointmentClass = `flex items-center gap-3 px-6 py-3 font-manrope text-sm font-semibold tracking-tight transition-all duration-200 ease-in-out ${
-    appointmentActive
-      ? "bg-blue-50 text-blue-700 border-r-4 border-blue-600"
-      : "text-slate-500 hover:bg-slate-50 hover:text-blue-600"
-  }`;
-
   return (
     <>
-      <div className="lg:hidden flex items-center justify-between px-6 mb-8">
-        <div className="text-xl font-extrabold text-blue-600 tracking-tight">
-          MedPanel
-        </div>
-
-        <button
-          onClick={onClose}
-          className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-slate-100"
-        >
-          <span className="material-symbols-outlined text-slate-700">close</span>
-        </button>
-      </div>
-
-      <div className="hidden lg:block text-xl font-extrabold text-blue-600 tracking-tight px-6 mb-8">
-        MedPanel
-      </div>
+      <SidebarLogo mobile onClose={onClose} />
+      <SidebarLogo />
 
       <div className="flex-1 overflow-y-auto">
-        <NavLink to="/dashboard" end className={navItemClass}>
-          <span className="material-symbols-outlined">dashboard</span>
-          <span>Dashboard</span>
-        </NavLink>
+        <SidebarNavItem
+          to="/dashboard"
+          icon="dashboard"
+          label="Dashboard"
+          end
+        />
 
-        <NavLink to="/appointments" className={appointmentClass}>
-          <span className="material-symbols-outlined">calendar_today</span>
-          <span>Appointments</span>
-        </NavLink>
+        <SidebarNavItem
+          to="/appointments"
+          icon="calendar_today"
+          label="Appointments"
+          active={appointmentActive}
+        />
 
-        <NavLink to="/patients" className={navItemClass}>
-          <span className="material-symbols-outlined">person</span>
-          <span>Patients</span>
-        </NavLink>
+        <SidebarNavItem to="/patients" icon="person" label="Patients" />
 
-     <NavLink to="/create-prescription" className={navItemClass}>
-  <span className="material-symbols-outlined">medication</span>
-  <span>Prescriptions</span>
-</NavLink>
+        <SidebarNavItem
+          to="/create-prescription"
+          icon="medication"
+          label="Prescriptions"
+        />
 
-        <NavLink to="/earnings" className={navItemClass}>
-          <span className="material-symbols-outlined">payments</span>
-          <span>Earnings</span>
-        </NavLink>
+        <SidebarNavItem to="/earnings" icon="payments" label="Earnings" />
 
-        <NavLink to="/availability" className={navItemClass}>
-          <span className="material-symbols-outlined">event_available</span>
-          <span>Availability</span>
-        </NavLink>
+        <SidebarNavItem
+          to="/availability"
+          icon="event_available"
+          label="Availability"
+        />
       </div>
 
       <div className="mt-auto border-t border-slate-100 pt-4">
-        <NavLink to="/profile-settings" className={navItemClass}>
-          <span className="material-symbols-outlined">account_circle</span>
-          <span>Profile</span>
-        </NavLink>
+        <SidebarNavItem
+          to="/profile-settings"
+          icon="account_circle"
+          label="Profile"
+        />
 
-        {/* <NavLink to="/settings" className={navItemClass}>
-          <span className="material-symbols-outlined">settings</span>
-          <span>Settings</span>
-        </NavLink> */}
-
-        <NavLink
-          to="/login"
-          className="flex items-center gap-3 px-6 py-3 text-red-600 transition-colors hover:bg-red-50 font-manrope text-sm font-semibold tracking-tight"
-        >
-          <span className="material-symbols-outlined">logout</span>
-          <span>Logout</span>
-        </NavLink>
+        <SidebarLogoutItem to="/login" />
       </div>
     </>
   );

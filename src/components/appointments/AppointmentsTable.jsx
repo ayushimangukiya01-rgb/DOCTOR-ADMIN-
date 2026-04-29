@@ -1,5 +1,9 @@
 import React from "react";
 import AppointmentRow from "./AppointmentRow";
+import TableContainer from "../../common/layout/TableContainer";
+import TableHeaderCell from "../../common/display/TableHeaderCell";
+import SelectField from "../../common/ui/SelectField";
+import TextIconButton from "../../common/ui/TextIconButton";
 
 const appointments = [
   {
@@ -64,71 +68,41 @@ const appointments = [
   },
 ];
 
+
+
 const AppointmentsTable = () => {
   return (
-    <div className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)] border border-slate-100 overflow-hidden">
+    <TableContainer>
+
       <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        
         <div className="flex flex-col sm:flex-row gap-4">
-          {/* <div className="relative">
-            <select className="appearance-none bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 pr-10 text-sm focus:border-[#004ac6] focus:ring-0 outline-none w-full">
-              <option>All Types</option>
-              <option>Video Call</option>
-              <option>Messages</option>
-              
-            </select>
-            <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm">
-              expand_more
-            </span>
-          </div> */}
-
-          <div className="relative">
-            <select className="appearance-none bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 pr-10 text-sm focus:border-[#004ac6] focus:ring-0 outline-none w-full">
-              <option>Any Type</option>
-              <option>Video Call</option>
-              <option>Message</option>
-               <option>Message Follow-up</option>
-              <option>Video-call Follow-up</option>
-
-
-            </select>
-            <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm">
-              expand_more
-            </span>
-          </div>
+          <SelectField
+            options={[
+              "Any Type",
+              "Video Call",
+              "Message",
+              "Message Follow-up",
+              "Video-call Follow-up",
+            ]}
+          />
         </div>
 
-        {/* <button className="flex items-center gap-2 text-[#004ac6] text-sm font-medium hover:underline">
-          <span className="material-symbols-outlined text-sm">filter_list</span>
+        <TextIconButton icon="filter_list">
           Clear Filters
-        </button> */}
+        </TextIconButton>
 
-        <button className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-[#004ac6] text-sm font-semibold hover:bg-blue-50 transition-all duration-200">
-  <span className="material-symbols-outlined text-[20px] leading-none">
-    filter_list
-  </span>
-  <span>Clear Filters</span>
-</button>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] text-left border-collapse">
           <thead>
             <tr className="bg-slate-50/50">
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.05em] text-[#434655]">
-                Patient Name
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.05em] text-[#434655]">
-                Date & Time
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.05em] text-[#434655]">
-                Type
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.05em] text-[#434655]">
-                status
-              </th>
-              <th className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.05em] text-[#434655] text-right">
-                Actions
-              </th>
+              <TableHeaderCell>Patient Name</TableHeaderCell>
+              <TableHeaderCell>Date & Time</TableHeaderCell>
+              <TableHeaderCell>Type</TableHeaderCell>
+              <TableHeaderCell>status</TableHeaderCell>
+              <TableHeaderCell align="right">Actions</TableHeaderCell>
             </tr>
           </thead>
 
@@ -139,7 +113,8 @@ const AppointmentsTable = () => {
           </tbody>
         </table>
       </div>
-    </div>
+
+    </TableContainer>
   );
 };
 
