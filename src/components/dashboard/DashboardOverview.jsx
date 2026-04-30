@@ -1,7 +1,7 @@
 import React from "react";
 import PageHeader from "../../common/typography/PageHeader";
 import ActionButton from "../../common/ui/ActionButton";
-import DashboardStatCard from "../../common/display/DashboardStatCard";
+import Card from "../../common/card/Card";
 
 const stats = [
   {
@@ -46,7 +46,7 @@ const DashboardOverview = () => {
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8">
       <div className="max-w-7xl mx-auto space-y-6 lg:space-y-8">
-        <div className="flex flex-col xl:flex-row xl:justify-between xl:items-end gap-5">
+      <div className="flex flex-col xl:flex-row xl:justify-between xl:items-center gap-5">
           <PageHeader
             title="Welcome back, Dr. Smith"
             subtitle="You have 12 appointments scheduled for today."
@@ -71,7 +71,7 @@ const DashboardOverview = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((item) => (
-            <DashboardStatCard key={item.label} {...item} />
+            <Card key={item.label} {...item} />
           ))}
         </div>
       </div>

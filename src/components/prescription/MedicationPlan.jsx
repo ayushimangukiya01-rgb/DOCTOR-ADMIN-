@@ -7,11 +7,11 @@ import FormSelect from "../../common/ui/FormSelect";
 const MedicationPlan = () => {
   return (
     <section className="bg-white rounded-xl border border-slate-100 medical-shadow overflow-hidden">
-      <div className="p-5 sm:p-6 border-b border-slate-100 bg-slate-50/50">
+       <div className="p-5 sm:p-6 border-b border-slate-100 bg-white">
         <SectionHeader icon="pill" title="Medication Plan" />
       </div>
 
-      <div className="p-5 sm:p-6 space-y-6">
+      <div className="p-5 sm:p-6 space-y-6 ">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-6 items-end">
           <div className="lg:col-span-4 space-y-1">
             <FormLabel>Medicine Name</FormLabel>

@@ -22,7 +22,6 @@ const MedicalHistory = () => {
   return (
     <CardContainer>
       <SectionHeader icon="history" title="Medical History" />
-
       <TimelineList items={historyItems} />
     </CardContainer>
   );

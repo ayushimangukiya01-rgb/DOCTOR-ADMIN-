@@ -22,18 +22,29 @@ const CreatePrescription = () => {
 
         <main className="flex-1">
           <div className="w-full max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
-  <PatientSummaryCard/>
-  <DiagnosisForm/>
-  <MedicationPlan/>
-  <PrescriptionExtraDetails/>
-  <PrescriptionNotesActions/>
+            {/* Page Heading */}
+            <div className="mb-2 sm:mb-4">
+              <h1 className="font-manrope text-[24px] sm:text-[28px] lg:text-[30px] leading-[32px] sm:leading-[36px] lg:leading-[38px] tracking-[-0.02em] font-bold text-slate-900">
+                Write Prescription
+              </h1>
 
-  <footer className="pt-8 pb-4 text-center border-t border-slate-100">
-    <p className="text-xs font-semibold tracking-[0.05em] uppercase text-slate-400">
-      © 2023 MedPanel Systems • HIPAA Compliant Interface
-    </p>
-  </footer>
-</div>
+              <p className="mt-1 text-[13px] sm:text-[14px] leading-5 text-slate-500">
+                Create and manage patient prescriptions efficiently.
+              </p>
+            </div>
+
+            <PatientSummaryCard />
+            <DiagnosisForm />
+            <MedicationPlan />
+            <PrescriptionExtraDetails />
+            <PrescriptionNotesActions />
+
+            <footer className="pt-8 pb-4 text-center border-t border-slate-100">
+              <p className="text-xs font-semibold tracking-[0.05em] uppercase text-slate-400">
+                © 2023 MedPanel Systems • HIPAA Compliant Interface
+              </p>
+            </footer>
+          </div>
         </main>
       </div>
     </div>

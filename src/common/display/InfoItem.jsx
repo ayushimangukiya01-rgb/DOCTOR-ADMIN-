@@ -1,21 +1,21 @@
 import React from "react";
 
-const InfoItem = ({ label, value, helper, italicHelper = false }) => {
+const InfoItem = ({ label, value, small = false }) => {
   return (
     <div>
-      <p className="text-[12px] leading-[16px] tracking-[0.05em] font-semibold text-slate-400 uppercase mb-1">
+      <span className="text-[12px] leading-[16px] tracking-[0.05em] font-semibold text-slate-400 block uppercase">
         {label}
-      </p>
+      </span>
 
-      <p className="font-manrope text-[20px] leading-[28px] font-semibold text-slate-900">
+      <span
+        className={
+          small
+            ? "text-[16px] leading-[24px] text-slate-900"
+            : "font-manrope text-[20px] leading-[28px] font-semibold text-slate-900"
+        }
+      >
         {value}
-      </p>
-
-      {helper && (
-        <p className={`text-sm text-slate-500 ${italicHelper ? "italic" : ""}`}>
-          {helper}
-        </p>
-      )}
+      </span>
     </div>
   );
 };

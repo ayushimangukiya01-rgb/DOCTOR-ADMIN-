@@ -9,7 +9,7 @@ const SectionHeader = ({
   const HeadingTag = headingType;
 
   return (
-    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6">
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6 font-extrabold ">
       <div className="flex items-center gap-3">
         {icon && (
           <span className="material-symbols-outlined text-[#004ac6]">

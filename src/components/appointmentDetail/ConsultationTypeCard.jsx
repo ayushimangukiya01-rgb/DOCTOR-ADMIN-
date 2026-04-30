@@ -5,7 +5,7 @@ import IconBox from "../../common/display/IconBox";
 
 const ConsultationTypeCard = () => {
   return (
-    <CardContainer>
+    <CardContainer size="left">
       <CardTitle>Consultation Type</CardTitle>
 
       <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
@@ -15,9 +15,7 @@ const ConsultationTypeCard = () => {
           <h4 className="text-[16px] leading-[24px] font-semibold text-slate-900">
             Video Call
           </h4>
-          <p className="text-sm text-slate-500">
-            Scheduled for 30 mins
-          </p>
+          <p className="text-sm text-slate-500">Scheduled for 30 mins</p>
         </div>
       </div>
     </CardContainer>

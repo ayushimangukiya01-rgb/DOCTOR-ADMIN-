@@ -1,8 +1,15 @@
+// src/common/layout/TableContainer.jsx
 import React from "react";
 
-const TableContainer = ({ children }) => {
+const TableContainer = ({ children, className = "", variant = "default" }) => {
+  const adminClass =
+    "bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_2px_10px_rgba(0,0,0,0.05)] overflow-hidden";
+
+  const defaultClass =
+    "bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden";
+
   return (
-    <div className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)] border border-slate-100 overflow-hidden">
+    <div className={`${variant === "admin" ? adminClass : defaultClass} ${className}`}>
       {children}
     </div>
   );

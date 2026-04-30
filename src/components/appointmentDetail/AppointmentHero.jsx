@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { commonStyles } from "../../common/styles/commonStyles";
 import SectionLabel from "../../common/typography/SectionLabel";
-import StatusBadge from "../../common/display/StatusBadge";
 import IconTextRow from "../../common/display/IconTextRow";
 import ActionButton from "../../common/ui/ActionButton";
 
@@ -13,12 +13,16 @@ const AppointmentHero = () => {
       <div>
         <SectionLabel>Upcoming Appointment</SectionLabel>
 
-        <h2 className="font-manrope text-[24px] sm:text-[30px] lg:text-[36px] leading-tight tracking-[-0.02em] font-bold text-slate-900">
+        <h2 className="font-manrope text-[24px] sm:text-[30px] lg:text-[36px] leading-tight tracking-[-0.02em] font-bold text-[#0f172a]">
           Oct 24, 2023 • 10:30 AM
         </h2>
 
         <div className="flex flex-wrap items-center gap-3 mt-3">
-          <StatusBadge label="Confirmed" />
+          {/* Confirm Badge */}
+          <div className={commonStyles.successBadge}>
+            <span className={commonStyles.successDot}></span>
+            Confirmed
+          </div>
 
           <IconTextRow icon="videocam" text="Video Consultation" />
         </div>

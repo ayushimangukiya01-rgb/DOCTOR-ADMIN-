@@ -1,6 +1,5 @@
 import React from "react";
-import SummaryMetricCard from "../../common/display/SummaryMetricCard";
-
+import Card from "../../common/card/Card";
 const summaryItems = [
   {
     label: "Total Earnings",
@@ -30,7 +29,15 @@ const EarningsSummary = () => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {summaryItems.map((item) => (
-        <SummaryMetricCard key={item.label} {...item} />
+       <Card
+  variant="summaryMetric"
+  label={item.label}
+  value={item.value}
+  metaIcon={item.metaIcon}
+  metaText={item.metaText}
+  metaColor={item.metaColor}
+  backgroundIcon={item.backgroundIcon}
+/>
       ))}
     </section>
   );

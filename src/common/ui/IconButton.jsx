@@ -1,12 +1,28 @@
+// src/common/ui/IconButton.jsx
 import React from "react";
 
-const IconButton = ({ icon, onClick, className = "" }) => {
+const IconButton = ({
+  icon,
+  className = "",
+  variant = "default",
+  children,
+  ...props
+}) => {
+  const adminClass =
+    "p-1.5 rounded-lg transition-colors inline-flex items-center justify-center";
+
+  const defaultClass =
+    "inline-flex items-center justify-center rounded-lg transition-colors";
+
   return (
     <button
-      onClick={onClick}
-      className={`flex items-center justify-center transition ${className}`}
+      className={`${variant === "admin" ? adminClass : defaultClass} ${className}`}
+      {...props}
     >
-      <span className="material-symbols-outlined">{icon}</span>
+      {icon && (
+        <span className="material-symbols-outlined text-[20px]">{icon}</span>
+      )}
+      {children}
     </button>
   );
 };

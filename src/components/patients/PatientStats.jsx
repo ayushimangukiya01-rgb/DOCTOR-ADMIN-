@@ -1,5 +1,5 @@
 import React from "react";
-import PatientStatCard from "../../common/display/PatientStatCard";
+import Card from "../../common/card/Card";
 
 const stats = [
   {
@@ -35,8 +35,16 @@ const stats = [
 const PatientStats = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6 mb-6">
-      {stats.map((item) => (
-        <PatientStatCard key={item.title} {...item} />
+      {stats.map((item, index) => (
+        <Card
+          key={item.title}   // ✅ FIX HERE
+          variant="patientStat"
+          icon={item.icon}
+          title={item.title}
+          value={item.value}
+          note={item.note}
+          color={item.color}
+        />
       ))}
     </div>
   );

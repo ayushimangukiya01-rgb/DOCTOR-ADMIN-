@@ -10,7 +10,7 @@ const Patients = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="bg-[#f8fafc] min-h-screen flex">
+    <div className="bg-[#F8FAFC] min-h-screen flex">
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
@@ -20,15 +20,21 @@ const Patients = () => {
         <Topbar setIsSidebarOpen={setIsSidebarOpen} />
 
         <main className="flex-1">
-          <div className="w-full max-w-[1280px] mx-auto p-4 sm:p-6 lg:p-8">
-  <PatientsHeader />
-<PatientStats/>
+          <div className="w-full max-w-[1280px] mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
+            
+            {/* Header */}
+            <PatientsHeader />
 
+            {/* Stats Cards */}
+            <PatientStats />
 
-<PatientFilters/>
-<PatientsTable/>
-</div>
-          
+            {/* Filters */}
+            <PatientFilters />
+
+            {/* Table */}
+            <PatientsTable />
+
+          </div>
         </main>
       </div>
     </div>

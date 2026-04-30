@@ -1,10 +1,12 @@
 import React from "react";
+import { commonStyles } from "../styles/commonStyles";
 
-const CardContainer = ({ children, className = "" }) => {
+const CardContainer = ({ children, className = "", size = "default" }) => {
+  const padding =
+    size === "left" ? commonStyles.leftCardPadding : commonStyles.cardPadding;
+
   return (
-    <div
-      className={`bg-white p-5 sm:p-6 lg:p-8 rounded-xl shadow-[0px_4px_12px_rgba(15,23,42,0.05)] border border-slate-100 ${className}`}
-    >
+    <div className={`${commonStyles.card} ${padding} ${className}`}>
       {children}
     </div>
   );
