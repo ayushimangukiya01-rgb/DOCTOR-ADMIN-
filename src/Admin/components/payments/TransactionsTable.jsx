@@ -1,71 +1,19 @@
 // src/Admin/components/payments/TransactionsTable.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import TableContainer from "../../../common/layout/TableContainer";
-
-const transactions = [
-  {
-    date: "Oct 24, 2023",
-    time: "09:42 AM",
-    doctor: "Dr. Sarah Adams",
-    department: "Cardiology",
-    doctorInitial: "SA",
-    patient: "Robert Fox",
-    patientId: "#PAT-8821",
-    amount: "$450.00",
-    commission: "$67.50",
-    rate: "15%",
-    status: "COMPLETED",
-    statusClass: "bg-tertiary-fixed text-on-tertiary-fixed-variant",
-    dotClass: "bg-tertiary",
-  },
-  {
-    date: "Oct 24, 2023",
-    time: "11:15 AM",
-    doctor: "Dr. James Miller",
-    department: "Neurology",
-    doctorInitial: "JM",
-    patient: "Leslie Alexander",
-    patientId: "#PAT-9032",
-    amount: "$1,200.00",
-    commission: "$180.00",
-    rate: "15%",
-    status: "PENDING",
-    statusClass: "bg-secondary-container text-on-secondary-container",
-    dotClass: "bg-secondary",
-  },
-  {
-    date: "Oct 23, 2023",
-    time: "03:50 PM",
-    doctor: "Dr. Emily Koh",
-    department: "Dermatology",
-    doctorInitial: "EK",
-    patient: "Wade Warren",
-    patientId: "#PAT-4412",
-    amount: "$220.00",
-    commission: "$33.00",
-    rate: "15%",
-    status: "COMPLETED",
-    statusClass: "bg-tertiary-fixed text-on-tertiary-fixed-variant",
-    dotClass: "bg-tertiary",
-  },
-  {
-    date: "Oct 23, 2023",
-    time: "01:20 PM",
-    doctor: "Dr. Richard Wang",
-    department: "General Medicine",
-    doctorInitial: "RW",
-    patient: "Jane Cooper",
-    patientId: "#PAT-1109",
-    amount: "$150.00",
-    commission: "$22.50",
-    rate: "15%",
-    status: "FAILED",
-    statusClass: "bg-error-container text-on-error-container",
-    dotClass: "bg-error",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminPayments } from "../../../redux/admin/payments/paymentSlice";
 
 const TransactionsTable = () => {
+  const dispatch = useDispatch();
+const { transactions } = useSelector((state) => state.adminPayments);
+
+useEffect(() => {
+  if (transactions.length === 0) {
+    dispatch(fetchAdminPayments());
+  }
+}, [dispatch, transactions.length]);
+
   return (
     <TableContainer variant="admin" className="min-w-0">
       <div className="p-5 sm:p-6 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

@@ -1,32 +1,23 @@
 // src/Admin/components/dashboard/RecentDoctorRequests.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import TableContainer from "../../../common/layout/TableContainer";
 import TableHeaderCell from "../../../common/display/TableHeaderCell";
 import StatusBadge from "../../../common/display/StatusBadge";
 import IconButton from "../../../common/ui/IconButton";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDashboard } from "../../../redux/admin/dashboard/dashboardSlice";
 
-const doctorRequests = [
-  {
-    name: "Dr. Sarah Chen",
-    specialization: "Cardiology",
-    experience: "12 Years",
-    date: "Oct 24, 2023",
-    status: "Pending",                      
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM",
-  },
-  {
-    name: "Dr. James Wilson",
-    specialization: "Neurology",
-    experience: "8 Years",
-    date: "Oct 23, 2023",
-    status: "Under Review",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDZh-b9xEItwjdTOaaI-eZoERLbyUDhtNxPO3CYLdeA4kdGziasIfHGZsG054s8DPvzz8Oimcge-OzTVbLjVuLUsNEhXfP1YqhV2pa5FO3BUfo6UWZdK2Z0iY7E9Ve2AwIz_oPnm8pv3XjN_A2cZd3XtyslqXvCUevatx9TXyqXyIpDgXxUtYjkwGGZ8vdPKjnPhnHpBqBDJG38L_zpY2S7mzUfFz4uVc6jyUYV0vTXsu4eCzgiqH5F5WAouVo53hIPerpFmlGubTob",
-  },
-];
 
 const RecentDoctorRequests = () => {
+const dispatch = useDispatch();
+const { doctorRequests } = useSelector((state) => state.dashboard);
+
+useEffect(() => {
+  if (doctorRequests.length === 0) {
+    dispatch(fetchDashboard());
+  }
+}, [dispatch, doctorRequests.length]);
+
   return (
     <TableContainer variant="admin" className="min-w-0">
       <div className="flex items-center justify-between gap-4 border-b border-outline-variant/30 px-4 py-4 sm:px-6">

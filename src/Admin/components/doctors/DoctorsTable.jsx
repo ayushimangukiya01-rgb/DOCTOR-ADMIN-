@@ -1,54 +1,57 @@
 // src/Admin/components/doctors/DoctorsTable.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import TableContainer from "../../../common/layout/TableContainer";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminDoctors } from "../../../redux/admin/doctors/doctorSlice";
 
-const doctors = [
-  {
-    name: "Dr. James Wilson",
-    id: "DOC-9821-W",
-    specialization: "Cardiology",
-    experience: "12 Years",
-    status: "Approve-Doctor",
-    fee: "$180.00",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCU__blwIXlrMpH8DCEUqfftv37KoppmfYIS-eiWLfssu46ldqzq17xA2jFUK6QjblSZyi7vnpLmDoyCa4nBJf8_kNdvZU5feV3dpANtM5pAujLA5_x62FW1s11XXchetUelM5ihQoEArHvhW77aS--rxfrwXFqz6X3hKw4_xRbchwP29p4c6eXdo17RltdpYyTO8li3DOPriUaMSDyjMBJe9IIqTxEKXDe24drDOuDPbh-6pngYxYlHCzXd88ErqiME2OiPQgFUDNG",
-  },
-  {
-    name: "Dr. Helena Marcus",
-    id: "DOC-4412-M",
-    specialization: "Neurology",
-    experience: "8 Years",
-    status: "Approve-Doctor",
-    fee: "$210.00",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC8z0LRelt9daQ2pw0EwGFCF11jpBQ-0EY7xCJibpT9FPn-E6Rb12drwz1Wag71r0BAwRv0CipHisqhxwpXxvwu-D0W__99YGSG5VwPclWLtRn9r58xcaKxUw4kFx75WEfLqTKaTGovdOGHxDXRjV7MJ8K3UHHll6-uJu0T329p6ACaw3CNlA5afcS7vCYUzF_PuEgsmbbrbfOweVDFtDtS9fIoHE9IymoNFJ-OLqIeb4E1X4jRGXstcprV8RkROBHyYLLbV5GLLjvi",
-  },
-  {
-    name: "Dr. Marcus Thorne",
-    id: "DOC-7723-T",
-    specialization: "Pediatrics",
-    experience: "15 Years",
-    status: "Reject-Profile",
-    fee: "$120.00",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAyMqKd2r7E-3DqaE55Sko1AA2FpDOyw07dTnw4y0BmFIYRd-Mu2AQpl5_agRXGjj5gcQsc7S4SUcCkKm8ngin2nnB1zL-CMidzmfQyhyaxjsXIUdFSoNxylglNGfQO3ofl_ixxlWLFTK-XWv9DKikwQKm5L6CjdfJvZ8Jq8FPL4HGG0q7dra_akw5HW7OvcKxWFKtEQHFqWXW2H-odZGJKrfEtBi58tIGAFUfpWITe6MWfZu3QapNOW5TpRSuAcLsRX79TvLuxr3lV",
-  },
-  {
-    name: "Dr. Sarah Miller",
-    id: "DOC-1102-S",
-    specialization: "Oncology",
-    experience: "20 Years",
-    status: "Reject-Profile",
-    fee: "$250.00",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC2-Ay1VN38Ziz3h47128YlbnzqxU7Xxbh_0jNmSH3Im1EKDsA-A9qe3X1_db5Ln3SUIORQ-flTTNRb3MibZj_NYJHq3WxBxLoQhiYvJdsNdNtcl3jPQh8Vvl71vHIQldEoCpKKhL8FTki_TIX_YrbhhI3jfADiY8bwMxxwJZMEmugIzLT2Eaz2aLMCEM57EtBiOWpxyw0LOaiHcHalQC4lnrWyPJCh9tFFKe9PG2h8VQSDKFRJ19XHSCoddzWXqNEJfSux2oxSEj2j",
-  },
-];
+// const doctors = [
+//   {
+//     name: "Dr. James Wilson",
+//     id: "DOC-9821-W",
+//     specialization: "Cardiology",
+//     experience: "12 Years",
+//     status: "Approve-Doctor",
+//     fee: "$180.00",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuCU__blwIXlrMpH8DCEUqfftv37KoppmfYIS-eiWLfssu46ldqzq17xA2jFUK6QjblSZyi7vnpLmDoyCa4nBJf8_kNdvZU5feV3dpANtM5pAujLA5_x62FW1s11XXchetUelM5ihQoEArHvhW77aS--rxfrwXFqz6X3hKw4_xRbchwP29p4c6eXdo17RltdpYyTO8li3DOPriUaMSDyjMBJe9IIqTxEKXDe24drDOuDPbh-6pngYxYlHCzXd88ErqiME2OiPQgFUDNG",
+//   },
+//   {
+//     name: "Dr. Helena Marcus",
+//     id: "DOC-4412-M",
+//     specialization: "Neurology",
+//     experience: "8 Years",
+//     status: "Approve-Doctor",
+//     fee: "$210.00",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuC8z0LRelt9daQ2pw0EwGFCF11jpBQ-0EY7xCJibpT9FPn-E6Rb12drwz1Wag71r0BAwRv0CipHisqhxwpXxvwu-D0W__99YGSG5VwPclWLtRn9r58xcaKxUw4kFx75WEfLqTKaTGovdOGHxDXRjV7MJ8K3UHHll6-uJu0T329p6ACaw3CNlA5afcS7vCYUzF_PuEgsmbbrbfOweVDFtDtS9fIoHE9IymoNFJ-OLqIeb4E1X4jRGXstcprV8RkROBHyYLLbV5GLLjvi",
+//   },
+//   {
+//     name: "Dr. Marcus Thorne",
+//     id: "DOC-7723-T",
+//     specialization: "Pediatrics",
+//     experience: "15 Years",
+//     status: "Reject-Profile",
+//     fee: "$120.00",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuAyMqKd2r7E-3DqaE55Sko1AA2FpDOyw07dTnw4y0BmFIYRd-Mu2AQpl5_agRXGjj5gcQsc7S4SUcCkKm8ngin2nnB1zL-CMidzmfQyhyaxjsXIUdFSoNxylglNGfQO3ofl_ixxlWLFTK-XWv9DKikwQKm5L6CjdfJvZ8Jq8FPL4HGG0q7dra_akw5HW7OvcKxWFKtEQHFqWXW2H-odZGJKrfEtBi58tIGAFUfpWITe6MWfZu3QapNOW5TpRSuAcLsRX79TvLuxr3lV",
+//   },
+//   {
+//     name: "Dr. Sarah Miller",
+//     id: "DOC-1102-S",
+//     specialization: "Oncology",
+//     experience: "20 Years",
+//     status: "Reject-Profile",
+//     fee: "$250.00",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuC2-Ay1VN38Ziz3h47128YlbnzqxU7Xxbh_0jNmSH3Im1EKDsA-A9qe3X1_db5Ln3SUIORQ-flTTNRb3MibZj_NYJHq3WxBxLoQhiYvJdsNdNtcl3jPQh8Vvl71vHIQldEoCpKKhL8FTki_TIX_YrbhhI3jfADiY8bwMxxwJZMEmugIzLT2Eaz2aLMCEM57EtBiOWpxyw0LOaiHcHalQC4lnrWyPJCh9tFFKe9PG2h8VQSDKFRJ19XHSCoddzWXqNEJfSux2oxSEj2j",
+//   },
+// ];
+
+
 
 const StatusPill = ({ status }) => {
   const isActive = status === "Approve-Doctor";
-  
 
   return (
     <span
@@ -70,6 +73,36 @@ const StatusPill = ({ status }) => {
 
 const DoctorsTable = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+const { doctors, loading, error } = useSelector(
+  (state) => state.adminDoctors
+);
+
+useEffect(() => {
+  if (doctors.length === 0) {
+    dispatch(fetchAdminDoctors());
+  }
+}, [dispatch, doctors.length]);
+
+  if (loading) {
+    return (
+      <TableContainer variant="admin" className="min-w-0 p-6">
+        <p className="font-body-md text-on-surface-variant">
+          Loading doctors...
+        </p>
+      </TableContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <TableContainer variant="admin" className="min-w-0 p-6">
+        <p className="font-body-md text-error">{error}</p>
+      </TableContainer>
+    );
+  }
+
   return (
     <TableContainer variant="admin" className="min-w-0">
       <div className="w-full overflow-x-auto custom-scrollbar">
@@ -142,11 +175,13 @@ const DoctorsTable = () => {
 
                 <td className="px-6 py-4 text-right">
                   <button
-   onClick={() => navigate("/admin/doctors/verify")}
-  className="p-1.5 hover:bg-secondary-container rounded-lg text-secondary transition-all"
->
-  <span className="material-symbols-outlined text-lg">edit</span>
-</button>
+                    onClick={() => navigate("/admin/doctors/verify")}
+                    className="p-1.5 hover:bg-secondary-container rounded-lg text-secondary transition-all"
+                  >
+                    <span className="material-symbols-outlined text-lg">
+                      edit
+                    </span>
+                  </button>
                 </td>
               </tr>
             ))}
@@ -156,7 +191,7 @@ const DoctorsTable = () => {
 
       <div className="px-4 py-4 sm:px-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-surface-container-lowest border-t border-outline-variant">
         <p className="font-body-sm text-body-sm text-outline">
-          Showing 1 to 4 of 124 entries
+          Showing 1 to {doctors.length} of 124 entries
         </p>
 
         <div className="flex flex-wrap gap-2">

@@ -4,25 +4,36 @@ import TableContainer from "../../../common/layout/TableContainer";
 import TableHeaderCell from "../../../common/display/TableHeaderCell";
 import StatusBadge from "../../../common/display/StatusBadge";
 import IconButton from "../../../common/ui/IconButton";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchDashboard } from "../../../redux/admin/dashboard/dashboardSlice";
 
-const appointments = [
-  {
-    patient: "Robert Fox",
-    doctor: "Dr. Sarah Chen",
-    time: "09:30 AM",
-    type: "Routine Checkup",
-    status: "Confirmed",
-  },
-  {
-    patient: "Jane Cooper",
-    doctor: "Dr. James Wilson",
-    time: "11:00 AM",
-    type: "Emergency Consultation",
-    status: "In Progress",
-  },
-];
+// const appointments = [
+//   {
+//     patient: "Robert Fox",
+//     doctor: "Dr. Sarah Chen",
+//     time: "09:30 AM",
+//     type: "Routine Checkup",
+//     status: "Confirmed",
+//   },
+//   {
+//     patient: "Jane Cooper",
+//     doctor: "Dr. James Wilson",
+//     time: "11:00 AM",
+//     type: "Emergency Consultation",
+//     status: "In Progress",
+//   },
+// ];
 
 const TodayAppointments = () => {
+  const dispatch = useDispatch();
+const { todayAppointments } = useSelector((state) => state.dashboard);
+
+useEffect(() => {
+  if (todayAppointments.length === 0) {
+    dispatch(fetchDashboard());
+  }
+}, [dispatch, todayAppointments.length]);
   return (
     <TableContainer variant="admin" className="min-w-0">
       <div className="flex items-center justify-between gap-4 border-b border-outline-variant/30 px-4 py-4 sm:px-6">
@@ -49,7 +60,7 @@ const TodayAppointments = () => {
           </thead>
 
           <tbody className="divide-y divide-outline-variant/20">
-            {appointments.map((item) => (
+            {todayAppointments.map((item) => (
               <tr
                 key={item.patient}
                 className="hover:bg-blue-50/30 transition-colors"

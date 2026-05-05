@@ -1,66 +1,77 @@
 // src/Admin/components/patients/PatientsTable.jsx
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAdminPatients } from "../../../redux/admin/patients/patientSlice";
 
-const patients = [
-  {
-    name: "Eleanor Pena",
-    id: "MED-99201",
-    age: "34 Years",
-    gender: "Female",
-    phone: "(209) 555-0104",
-    email: "eleanor.p@example.com",
-    lastVisit: "Oct 12, 2023",
-    visitType: "General Checkup",
-    status: "Stable",
-    statusClass: "bg-green-100 text-green-700",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAX75CvWmaYUZg9o9j0rRSAb06AQ7n_SL4Yx-mQ1RLnpW3j7gpJIn-nO2aRH6Fun0HY6GRUs1YGegUCE74WbneOa-qgUaWld9GF9QczHl3s3819OevEk9mkSjxBxEEs02ppJ_dqwclZC0VjEtNJm74RqeuIfNfWMG-MksSanj3A4ZDTIXAeVp5OUXu-fCM0ePt3iV1emuNX6SRgvJexrIaQly7gyw8_Xaertv65QPnJF1h1OXE5mE-yOYfJ8WVwGdJBelRrB_aqH6Qu",
-  },
-  {
-    name: "Robert Fox",
-    id: "MED-99202",
-    age: "45 Years",
-    gender: "Male",
-    phone: "(406) 555-0120",
-    email: "robert.fox@example.com",
-    lastVisit: "Oct 14, 2023",
-    visitType: "Cardiology",
-    status: "Critical",
-    statusClass: "bg-red-100 text-red-700",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuB5dmA278a82NaY1hyXixd7EJWiuuAzhQCbTONOYYhnyYeyFNLO28jdaiBNequRj6o0qDY3YTe1VW1ukpo3Li4EgxArciUgzlnBwN3KIScQt3zOIEQPM6zcTtZ9z0yJt7ceyRUavbaGGe3BlWrcC2eNOaS2ucF9NBXryOuaf5pkyom5S72l01Z8DcF0XE12-I-OLNG-rTbQWEPn3Q6zpJdYWkavEyo_03jNjG36HT7FxsihL5BNu4IN7gqHu6RFuQbbStmZ4ZBcCxCs",
-  },
-  {
-    name: "Jane Cooper",
-    id: "MED-99203",
-    age: "28 Years",
-    gender: "Female",
-    phone: "(219) 555-0114",
-    email: "jane.c@example.com",
-    lastVisit: "Oct 15, 2023",
-    visitType: "Dermatology",
-    status: "Recovering",
-    statusClass: "bg-blue-100 text-blue-700",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5_7zXCOGPY7Xc60xwEKPZyJbh5j3Fip22KYcHWxy7tO2FTciGy8M7hWZ6e11dlPwI-cS35Su3wfSRL-bvsrQ_caz12lhrnEQ0Shee7zJ1boQ6Tf5eyG9UTWGvf_iJ_mCAh5OfC1FGbC326JDCU6EhDX1wfBoE34P9oZ4wd3YW3fRds1fFaujcwllwQuCaXp5cXihTb72GTOzTzsqBrtVwz7k_7XDdun-5OM4rRmgmTF_w9yulG_ALcaKBgx7gNj3-y6FtM5J4Nue",
-  },
-  {
-    name: "Cameron Williamson",
-    id: "MED-99204",
-    age: "38 Years",
-    gender: "Male",
-    phone: "(302) 555-0107",
-    email: "cam.w@example.com",
-    lastVisit: "Oct 16, 2023",
-    visitType: "Pediatrics",
-    status: "Stable",
-    statusClass: "bg-green-100 text-green-700",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBDtTUjbAkve1yP4fIpaEuubCAhd_701IW-KMT3cs6qp8LPFCbooy4xsxdqUaDIqb7mgVETUMi4hwCaly19_5gD-oaRGNi-_kZzzQHHhVOgUt3JOIwn4FnXl_jWTjTDpQYIVaX5D9Aujp45oJUyCagyAJ0q896UNWXe6LCe5BIqP-MvdswvgfM71mWzxXDQ5qaQLExVAQt-bnpIunQZrcr6-WN7v53GCdG0RLtAW6xkPeMp1wELgRVp-2gCDFDnLe9Sk_xB-_zDpcAu",
-  },
-];
+// const patients = [
+//   {
+//     name: "Eleanor Pena",
+//     id: "MED-99201",
+//     age: "34 Years",
+//     gender: "Female",
+//     phone: "(209) 555-0104",
+//     email: "eleanor.p@example.com",
+//     lastVisit: "Oct 12, 2023",
+//     visitType: "General Checkup",
+//     status: "Stable",
+//     statusClass: "bg-green-100 text-green-700",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuAX75CvWmaYUZg9o9j0rRSAb06AQ7n_SL4Yx-mQ1RLnpW3j7gpJIn-nO2aRH6Fun0HY6GRUs1YGegUCE74WbneOa-qgUaWld9GF9QczHl3s3819OevEk9mkSjxBxEEs02ppJ_dqwclZC0VjEtNJm74RqeuIfNfWMG-MksSanj3A4ZDTIXAeVp5OUXu-fCM0ePt3iV1emuNX6SRgvJexrIaQly7gyw8_Xaertv65QPnJF1h1OXE5mE-yOYfJ8WVwGdJBelRrB_aqH6Qu",
+//   },
+//   {
+//     name: "Robert Fox",
+//     id: "MED-99202",
+//     age: "45 Years",
+//     gender: "Male",
+//     phone: "(406) 555-0120",
+//     email: "robert.fox@example.com",
+//     lastVisit: "Oct 14, 2023",
+//     visitType: "Cardiology",
+//     status: "Critical",
+//     statusClass: "bg-red-100 text-red-700",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuB5dmA278a82NaY1hyXixd7EJWiuuAzhQCbTONOYYhnyYeyFNLO28jdaiBNequRj6o0qDY3YTe1VW1ukpo3Li4EgxArciUgzlnBwN3KIScQt3zOIEQPM6zcTtZ9z0yJt7ceyRUavbaGGe3BlWrcC2eNOaS2ucF9NBXryOuaf5pkyom5S72l01Z8DcF0XE12-I-OLNG-rTbQWEPn3Q6zpJdYWkavEyo_03jNjG36HT7FxsihL5BNu4IN7gqHu6RFuQbbStmZ4ZBcCxCs",
+//   },
+//   {
+//     name: "Jane Cooper",
+//     id: "MED-99203",
+//     age: "28 Years",
+//     gender: "Female",
+//     phone: "(219) 555-0114",
+//     email: "jane.c@example.com",
+//     lastVisit: "Oct 15, 2023",
+//     visitType: "Dermatology",
+//     status: "Recovering",
+//     statusClass: "bg-blue-100 text-blue-700",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuBQ5_7zXCOGPY7Xc60xwEKPZyJbh5j3Fip22KYcHWxy7tO2FTciGy8M7hWZ6e11dlPwI-cS35Su3wfSRL-bvsrQ_caz12lhrnEQ0Shee7zJ1boQ6Tf5eyG9UTWGvf_iJ_mCAh5OfC1FGbC326JDCU6EhDX1wfBoE34P9oZ4wd3YW3fRds1fFaujcwllwQuCaXp5cXihTb72GTOzTzsqBrtVwz7k_7XDdun-5OM4rRmgmTF_w9yulG_ALcaKBgx7gNj3-y6FtM5J4Nue",
+//   },
+//   {
+//     name: "Cameron Williamson",
+//     id: "MED-99204",
+//     age: "38 Years",
+//     gender: "Male",
+//     phone: "(302) 555-0107",
+//     email: "cam.w@example.com",
+//     lastVisit: "Oct 16, 2023",
+//     visitType: "Pediatrics",
+//     status: "Stable",
+//     statusClass: "bg-green-100 text-green-700",
+//     avatar:
+//       "https://lh3.googleusercontent.com/aida-public/AB6AXuBDtTUjbAkve1yP4fIpaEuubCAhd_701IW-KMT3cs6qp8LPFCbooy4xsxdqUaDIqb7mgVETUMi4hwCaly19_5gD-oaRGNi-_kZzzQHHhVOgUt3JOIwn4FnXl_jWTjTDpQYIVaX5D9Aujp45oJUyCagyAJ0q896UNWXe6LCe5BIqP-MvdswvgfM71mWzxXDQ5qaQLExVAQt-bnpIunQZrcr6-WN7v53GCdG0RLtAW6xkPeMp1wELgRVp-2gCDFDnLe9Sk_xB-_zDpcAu",
+//   },
+// ];
 
 const PatientsTable = () => {
+const dispatch = useDispatch();
+const { patients } = useSelector((state) => state.adminPatients);
+
+useEffect(() => {
+  if (patients.length === 0) {
+    dispatch(fetchAdminPatients());
+  }
+}, [dispatch, patients.length]);
   return (
     <>
       <div className="overflow-x-auto">

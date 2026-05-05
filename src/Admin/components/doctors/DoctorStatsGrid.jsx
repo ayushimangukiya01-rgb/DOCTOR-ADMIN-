@@ -1,38 +1,51 @@
 // src/Admin/components/doctors/DoctorStatsGrid.jsx
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminDoctors } from "../../../redux/admin/doctors/doctorSlice";
 
-const stats = [
-  {
-    label: "Total Doctors",
-    value: "124",
-    icon: "medical_services",
-    bg: "bg-blue-50",
-    text: "text-primary",
-  },
-  {
-    label: " Approve Doctor",
-    value: "98",
-    icon: "verified",
-    bg: "bg-green-50",
-    text: "text-green-600",
-  },
-  {
-    label: "Reject Profile",
-    value: "12",
-    icon: "event_busy",
-    bg: "bg-orange-50",
-    text: "text-orange-600",
-  },
-  {
-    label: " Pending Profile",
-    value: "14",
-    icon: "pending_actions",
-    bg: "bg-purple-50",
-    text: "text-purple-600",
-  },
-];
+// const stats = [
+//   {
+//     label: "Total Doctors",
+//     value: "124",
+//     icon: "medical_services",
+//     bg: "bg-blue-50",
+//     text: "text-primary",
+//   },
+//   {
+//     label: " Approve Doctor",
+//     value: "98",
+//     icon: "verified",
+//     bg: "bg-green-50",
+//     text: "text-green-600",
+//   },
+//   {
+//     label: "Reject Profile",
+//     value: "12",
+//     icon: "event_busy",
+//     bg: "bg-orange-50",
+//     text: "text-orange-600",
+//   },
+//   {
+//     label: " Pending Profile",
+//     value: "14",
+//     icon: "pending_actions",
+//     bg: "bg-purple-50",
+//     text: "text-purple-600",
+//   },
+// ];
+
+
 
 const DoctorStatsGrid = () => {
+  const dispatch = useDispatch();
+const { stats } = useSelector((state) => state.adminDoctors);
+
+useEffect(() => {
+  if (stats.length === 0) {
+    dispatch(fetchAdminDoctors());
+  }
+}, [dispatch, stats.length]);
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
       {stats.map((item) => (

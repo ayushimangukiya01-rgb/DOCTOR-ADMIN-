@@ -1,22 +1,18 @@
 // src/Admin/components/appointments/AppointmentHeader.jsx
-import React from "react";
-
-const stats = [
-  {
-    label: "Today",
-    value: "42",
-    icon: "calendar_today",
-    iconClass: "bg-blue-50 text-primary",
-  },
-  {
-    label: "Completed",
-    value: "12",
-    icon: "check_circle",
-    iconClass: "bg-tertiary-fixed/30 text-tertiary",
-  },
-];
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminAppointments } from "../../../redux/admin/appointments/appointmentSlice";
 
 const AppointmentHeader = () => {
+  const dispatch = useDispatch();
+  const { stats } = useSelector((state) => state.adminAppointments);
+
+useEffect(() => {
+  if (stats.length === 0) {
+    dispatch(fetchAdminAppointments());
+  }
+}, [dispatch, stats.length]);
+
   return (
     <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between mb-8">
       <div>
@@ -36,14 +32,18 @@ const AppointmentHeader = () => {
             className="bg-white p-4 rounded-xl border border-outline-variant shadow-sm flex items-center gap-4 min-w-[160px]"
           >
             <div className={`p-3 rounded-lg ${item.iconClass}`}>
-              <span className="material-symbols-outlined">{item.icon}</span>
+              <span className="material-symbols-outlined">
+                {item.icon}
+              </span>
             </div>
 
             <div>
               <p className="font-label-sm text-on-surface-variant">
                 {item.label}
               </p>
-              <p className="font-h3 text-on-surface">{item.value}</p>
+              <p className="font-h3 text-on-surface">
+                {item.value}
+              </p>
             </div>
           </div>
         ))}

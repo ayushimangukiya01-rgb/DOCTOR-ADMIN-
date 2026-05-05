@@ -1,32 +1,16 @@
 // src/Admin/components/dashboard/PlatformActivity.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "../../../common/layout/CardContainer";
-
-const activities = [
-  {
-    icon: "verified_user",
-    title: "New Doctor Verified",
-    description: "Dr. Alan Turing was approved for Neurosurgery",
-    time: "2 hours ago",
-    iconClass: "bg-blue-50 text-primary border border-blue-100",
-  },
-  {
-    icon: "report_problem",
-    title: "Urgent Ticket Raised",
-    description: "Payment gateway timeout reported by Patient ID #4292",
-    time: "5 hours ago",
-    iconClass: "bg-orange-50 text-orange-600 border border-orange-100",
-  },
-  {
-    icon: "monitoring",
-    title: "Monthly Analytics Ready",
-    description: "The performance report for October is now available",
-    time: "Yesterday",
-    iconClass: "bg-purple-50 text-purple-600 border border-purple-100",
-  },
-];
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDashboard } from "../../../redux/admin/dashboard/dashboardSlice";
 const PlatformActivity = () => {
+  const dispatch = useDispatch();
+  const { platformActivities } = useSelector((state) => state.dashboard);
+
+  useEffect(() => {
+    dispatch(fetchDashboard());
+  }, [dispatch]);
+
   return (
     <CardContainer variant="admin" className="p-5 sm:p-6 min-w-0">
       <h3 className="text-[20px] leading-7 tracking-[-0.01em] font-semibold text-on-surface mb-6">
@@ -34,7 +18,7 @@ const PlatformActivity = () => {
       </h3>
 
       <div className="space-y-6">
-        {activities.map((item, index) => (
+        {platformActivities.map((item, index) => (
           <div key={item.title} className="flex gap-4 min-w-0">
             <div className="flex flex-col items-center shrink-0">
               <div
@@ -45,7 +29,7 @@ const PlatformActivity = () => {
                 </span>
               </div>
 
-              {index !== activities.length - 1 && (
+              {index !== platformActivities.length - 1 && (
                 <div className="w-0.5 flex-1 bg-gray-100 my-1"></div>
               )}
             </div>

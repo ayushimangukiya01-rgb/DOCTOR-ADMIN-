@@ -1,32 +1,48 @@
 // src/Admin/components/appointments/AppointmentBottomCards.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "../../../common/layout/CardContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminAppointments } from "../../../redux/admin/appointments/appointmentSlice";
 
-const topDoctors = [
-  {
-    name: "Dr. Sarah Chen",
-    value: "24 appointments",
-    iconClass: "bg-blue-50 text-primary",
-  },
-  {
-    name: "Dr. James Wilson",
-    value: "18 appointments",
-    iconClass: "bg-green-50 text-tertiary",
-  },
-  {
-    name: "Dr. Lisa Thorne",
-    value: "15 appointments",
-    iconClass: "bg-purple-50 text-purple-600",
-  },
-];
+// const topDoctors = [
+//   {
+//     name: "Dr. Sarah Chen",
+//     value: "24 appointments",
+//     iconClass: "bg-blue-50 text-primary",
+//   },
+//   {
+//     name: "Dr. James Wilson",
+//     value: "18 appointments",
+//     iconClass: "bg-green-50 text-tertiary",
+//   },
+//   {
+//     name: "Dr. Lisa Thorne",
+//     value: "15 appointments",
+//     iconClass: "bg-purple-50 text-purple-600",
+//   },
+// ];
 
-const appointmentTypes = [
-  { label: "Consultation", value: "45%", color: "bg-blue-500" },
-  { label: "Follow-up", value: "30%", color: "bg-green-500" },
-  { label: "Emergency", value: "25%", color: "bg-red-500" },
-];
+// const appointmentTypes = [
+//   { label: "Consultation", value: "45%", color: "bg-blue-500" },
+//   { label: "Follow-up", value: "30%", color: "bg-green-500" },
+//   { label: "Emergency", value: "25%", color: "bg-red-500" },
+// ];
+
+// src/Admin/components/appointments/AppointmentBottomCards.jsx
+
 
 const AppointmentBottomCards = () => {
+  const dispatch = useDispatch();
+const { topDoctors, appointmentTypes } = useSelector(
+  (state) => state.adminAppointments
+);
+
+useEffect(() => {
+  if (topDoctors.length === 0 || appointmentTypes.length === 0) {
+    dispatch(fetchAdminAppointments());
+  }
+}, [dispatch, topDoctors.length, appointmentTypes.length]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
       {/* Top Doctors */}
