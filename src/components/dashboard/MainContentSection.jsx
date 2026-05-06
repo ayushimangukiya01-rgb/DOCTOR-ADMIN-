@@ -3,7 +3,7 @@ import UpcomingAppointments from "./UpcomingAppointments";
 import WeeklyStats from "./WeeklyStats";
 import QuickActions from "./QuickActions";
 import RecentActivity from "./RecentActivity";
-import UpgradeCard from "./UpgradeCard";
+
 
 const MainContentSection = () => {
   return (
@@ -18,7 +18,7 @@ const MainContentSection = () => {
           <div className="xl:col-span-4 space-y-6">
             <QuickActions />
             <RecentActivity />
-            <UpgradeCard />
+            
           </div>
         </div>
       </div>

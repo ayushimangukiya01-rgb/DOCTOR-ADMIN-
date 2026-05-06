@@ -1,28 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "../../common/layout/CardContainer";
 import SectionHeader from "../../common/typography/SectionHeader";
 import TimelineList from "../../common/display/TimelineList";
-
-const historyItems = [
-  {
-    title: "Annual Physical Examination",
-    subtitle: "General Checkup • Dr. Robert Chen",
-    date: "Aug 12, 2023",
-    active: true,
-  },
-  {
-    title: "Type 2 Diabetes Diagnosis",
-    subtitle: "Endocrinology • City General Hospital",
-    date: "Jan 05, 2022",
-    active: false,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDoctorAppointmentDetail } from "../../redux/doctor/appointmentDetail/doctorAppointmentDetailSlice";
 
 const MedicalHistory = () => {
+  const dispatch = useDispatch();
+
+  const { medicalHistory } = useSelector(
+    (state) => state.doctorAppointmentDetail
+  );
+
+  useEffect(() => {
+    if (medicalHistory.length === 0) {
+      dispatch(fetchDoctorAppointmentDetail());
+    }
+  }, [dispatch, medicalHistory.length]);
+
   return (
     <CardContainer>
       <SectionHeader icon="history" title="Medical History" />
-      <TimelineList items={historyItems} />
+      <TimelineList items={medicalHistory} />
     </CardContainer>
   );
 };

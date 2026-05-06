@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "../../common/layout/CardContainer";
 import ChartRangeTabs from "../../common/ui/ChartRangeTabs";
 import RevenueBarItem from "../../common/display/RevenueBarItem";
-
-const chartData = [
-  { month: "May", height: "45%" },
-  { month: "Jun", height: "60%" },
-  { month: "Jul", height: "55%" },
-  { month: "Aug", height: "85%" },
-  { month: "Sep", height: "70%", active: true, tooltip: "$2,100.00" },
-  { month: "Oct", height: "40%", dashed: true },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDoctorEarnings } from "../../redux/doctor/earnings/doctorEarningsSlice";
 
 const RevenueChart = () => {
+  const dispatch = useDispatch();
+
+  const { revenueChart } = useSelector(
+    (state) => state.doctorEarnings
+  );
+
+  useEffect(() => {
+    if (revenueChart.length === 0) {
+      dispatch(fetchDoctorEarnings());
+    }
+  }, [dispatch, revenueChart.length]);
+
   return (
     <CardContainer className="p-6 sm:p-8">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
@@ -20,6 +25,7 @@ const RevenueChart = () => {
           <h3 className="font-manrope text-[20px] leading-[28px] font-semibold text-slate-900">
             Revenue Overview
           </h3>
+
           <p className="text-sm text-slate-500">
             Monthly performance analytics
           </p>
@@ -39,8 +45,8 @@ const RevenueChart = () => {
           <div className="border-t border-slate-50"></div>
         </div>
 
-        {chartData.map((item) => (
-          <RevenueBarItem key={item.month} {...item} />
+        {revenueChart.map((item) => (
+          <RevenueBarItem key={item.month} {...item}  />
         ))}
       </div>
     </CardContainer>

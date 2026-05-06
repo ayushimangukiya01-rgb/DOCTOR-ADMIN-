@@ -1,61 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TransactionRow from "./TransactionRow";
 import TableContainer from "../../common/layout/TableContainer";
 import TransactionHeaderCell from "../../common/display/TransactionHeaderCell";
 import TableIconPager from "../../common/ui/TableIconPager";
-
-const transactions = [
-  {
-    date: "Oct 12, 2023",
-    patient: "Jane Doe",
-    type: "Tele-consultation",
-    reference: "TXN-90210-A",
-    amount: "$120.00",
-    status: "PAID",
-    statusClass: "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",
-    initials: "JD",
-    avatarBg: "bg-blue-50",
-    avatarText: "text-blue-600",
-  },
-  {
-    date: "Oct 11, 2023",
-    patient: "Mark Smith",
-    type: "In-person Followup",
-    reference: "TXN-88432-C",
-    amount: "$85.00",
-    status: "PAID",
-    statusClass: "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",
-    initials: "MS",
-    avatarBg: "bg-slate-100",
-    avatarText: "text-slate-600",
-  },
-  {
-    date: "Oct 10, 2023",
-    patient: "Linda White",
-    type: "Initial Assessment",
-    reference: "TXN-77211-B",
-    amount: "$200.00",
-    status: "PROCESSING",
-    statusClass: "bg-blue-50 text-blue-600 border-blue-100",
-    initials: "LW",
-    avatarBg: "bg-blue-50",
-    avatarText: "text-blue-600",
-  },
-  {
-    date: "Oct 09, 2023",
-    patient: "Robert King",
-    type: "Lab Results Review",
-    reference: "TXN-66410-F",
-    amount: "$45.00",
-    status: "PAID",
-    statusClass: "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",
-    initials: "RK",
-    avatarBg: "bg-slate-100",
-    avatarText: "text-slate-600",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDoctorEarnings } from "../../redux/doctor/earnings/doctorEarningsSlice";
 
 const TransactionTable = () => {
+  const dispatch = useDispatch();
+  const { transactions } = useSelector((state) => state.doctorEarnings);
+
+  useEffect(() => {
+    if (transactions.length === 0) {
+      dispatch(fetchDoctorEarnings());
+    }
+  }, [dispatch, transactions.length]);
+
   return (
     <TableContainer>
       <div className="px-4 sm:px-6 lg:px-8 py-5 sm:py-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-b border-slate-50">
@@ -71,17 +31,16 @@ const TransactionTable = () => {
 
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] text-left">
-         <thead>
-  <tr className="bg-slate-50/50">
-    <TransactionHeaderCell>Patient</TransactionHeaderCell>
-
-    <TransactionHeaderCell>Date</TransactionHeaderCell>
-    <TransactionHeaderCell>Reference ID</TransactionHeaderCell>
-    <TransactionHeaderCell>Amount</TransactionHeaderCell>
-    <TransactionHeaderCell>Status</TransactionHeaderCell>
-    <th className="px-8 py-4"></th>
-  </tr>
-</thead>
+          <thead>
+            <tr className="bg-slate-50/50">
+              <TransactionHeaderCell>Patient</TransactionHeaderCell>
+              <TransactionHeaderCell>Date</TransactionHeaderCell>
+              <TransactionHeaderCell>Reference ID</TransactionHeaderCell>
+              <TransactionHeaderCell>Amount</TransactionHeaderCell>
+              <TransactionHeaderCell>Status</TransactionHeaderCell>
+              <th className="px-8 py-4"></th>
+            </tr>
+          </thead>
 
           <tbody className="divide-y divide-slate-50">
             {transactions.map((transaction) => (

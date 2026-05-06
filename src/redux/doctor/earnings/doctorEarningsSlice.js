@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getData } from "../../../api/apiHandler";
 
-export const fetchAdminPayments = createAsyncThunk(
-  "adminPayments/fetchAdminPayments",
-  async () => await getData("/admin/payments")
+export const fetchDoctorEarnings = createAsyncThunk(
+  "doctorEarnings/fetchDoctorEarnings",
+  async () => {
+    return await getData("/doctor/earnings");
+  }
 );
 
-const paymentSlice = createSlice({
-  name: "adminPayments",
+const doctorEarningsSlice = createSlice({
+  name: "doctorEarnings",
   initialState: {
-    summary: [],
+    summaryItems: [],
+    revenueChart: [],
     transactions: [],
     loading: false,
     error: null,
@@ -17,19 +20,19 @@ const paymentSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAdminPayments.pending, (state) => {
+      .addCase(fetchDoctorEarnings.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAdminPayments.fulfilled, (state, action) => {
+      .addCase(fetchDoctorEarnings.fulfilled, (state, action) => {
         state.loading = false;
         Object.assign(state, action.payload);
       })
-      .addCase(fetchAdminPayments.rejected, (state, action) => {
+      .addCase(fetchDoctorEarnings.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
 
-export default paymentSlice.reducer;
+export default doctorEarningsSlice.reducer;

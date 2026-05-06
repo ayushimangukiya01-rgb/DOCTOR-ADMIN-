@@ -1,33 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "../../common/layout/CardContainer";
 import SectionHeader from "../../common/typography/SectionHeader";
 import PillBadge from "../../common/ui/PillBadge";
 import DescriptionBox from "../../common/display/DescriptionBox";
-
-const symptoms = [
-  "Chronic Migraine",
-  "Nausea",
-  "Light Sensitivity",
-  "Dizziness",
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDoctorAppointmentDetail } from "../../redux/doctor/appointmentDetail/doctorAppointmentDetailSlice";
 
 const CurrentSymptoms = () => {
+  const dispatch = useDispatch();
+
+  const { currentSymptoms } = useSelector(
+    (state) => state.doctorAppointmentDetail
+  );
+
+  useEffect(() => {
+    if (!currentSymptoms?.symptoms?.length) {
+      dispatch(fetchDoctorAppointmentDetail());
+    }
+  }, [dispatch, currentSymptoms?.symptoms?.length]);
+
   return (
     <CardContainer>
       <SectionHeader icon="medical_services" title="Current Symptoms" />
 
       <div className="flex flex-wrap gap-2 mb-4">
-        {symptoms.map((item) => (
+        {currentSymptoms.symptoms.map((item) => (
           <PillBadge key={item}>{item}</PillBadge>
         ))}
       </div>
 
-      <DescriptionBox>
-        "I've been experiencing intense throbbing pain on the left side of my
-        head for the past 3 days. It usually gets worse in the afternoon and is
-        accompanied by extreme sensitivity to bright lights. Ibuprofen hasn't
-        provided much relief."
-      </DescriptionBox>
+      <DescriptionBox>{currentSymptoms.description}</DescriptionBox>
     </CardContainer>
   );
 };

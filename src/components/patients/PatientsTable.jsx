@@ -1,83 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PatientRow from "./PatientRow";
 import PatientMobileCard from "./PatientMobileCard";
 import PatientTableHeaderCell from "../../common/display/PatientTableHeaderCell";
 import PaginationButton from "../../common/ui/PaginationButton";
-
-const patients = [
-  {
-    id: "P-1001",
-    name: "Sarah Johnson",
-    age: 28,
-    gender: "Female",
-    phone: "(555) 123-4567",
-    email: "sarah.j@email.com",
-    lastVisit: "27 Apr 2024",
-    condition: "Hypertension",
-    status: "Follow-up",
-    img: "https://randomuser.me/api/portraits/women/44.jpg",
-  },
-  {
-    id: "P-1002",
-    name: "Michael Brown",
-    age: 45,
-    gender: "Male",
-    phone: "(555) 987-6543",
-    email: "michael.b@email.com",
-    lastVisit: "25 Apr 2024",
-    condition: "Diabetes Type 2",
-    status: "Stable",
-    img: "https://randomuser.me/api/portraits/men/32.jpg",
-  },
-  {
-    id: "P-1003",
-    name: "Emily Davis",
-    age: 32,
-    gender: "Female",
-    phone: "(555) 456-7890",
-    email: "emily.d@email.com",
-    lastVisit: "23 Apr 2024",
-    condition: "Asthma",
-    status: "Stable",
-    img: "https://randomuser.me/api/portraits/women/65.jpg",
-  },
-  {
-    id: "P-1004",
-    name: "Linda Wilson",
-    age: 60,
-    gender: "Female",
-    phone: "(555) 321-0987",
-    email: "linda.w@email.com",
-    lastVisit: "21 Apr 2024",
-    condition: "Arthritis",
-    status: "Follow-up",
-    img: "https://randomuser.me/api/portraits/women/70.jpg",
-  },
-  {
-    id: "P-1005",
-    name: "David Lee",
-    age: 50,
-    gender: "Male",
-    phone: "(555) 654-3210",
-    email: "david.l@email.com",
-    lastVisit: "20 Apr 2024",
-    condition: "Heart Disease",
-    status: "Critical",
-    img: "https://randomuser.me/api/portraits/men/75.jpg",
-  },
-];
-
-const tableHeaders = [
-  "Patient",
-  "Age / Gender",
-  "Contact",
-  "Last Visit",
-  "Condition",
-  "Status",
-  "Action",
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDoctorPatients } from "../../redux/doctor/patients/doctorPatientsSlice";
 
 const PatientsTable = () => {
+  const dispatch = useDispatch();
+
+  const { patients, tableHeaders } = useSelector(
+    (state) => state.doctorPatients
+  );
+
+  useEffect(() => {
+    if (patients.length === 0) {
+      dispatch(fetchDoctorPatients());
+    }
+  }, [dispatch, patients.length]);
+
   return (
     <div className="bg-white rounded-b-xl border border-slate-100 shadow-[0px_4px_12px_rgba(15,23,42,0.05)] overflow-hidden">
       <div className="hidden lg:block overflow-x-auto">

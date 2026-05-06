@@ -1,15 +1,9 @@
-// src/redux/admin/doctors/doctorSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { mockDoctors, mockDoctorStats } from "../../../data/adminMockData";
+import { getData } from "../../../api/apiHandler";
 
 export const fetchAdminDoctors = createAsyncThunk(
   "adminDoctors/fetchAdminDoctors",
-  async () => {
-    return {
-      doctors: mockDoctors,
-      stats: mockDoctorStats,
-    };
-  }
+  async () => await getData("/admin/doctors")
 );
 
 const doctorSlice = createSlice({
@@ -29,8 +23,7 @@ const doctorSlice = createSlice({
       })
       .addCase(fetchAdminDoctors.fulfilled, (state, action) => {
         state.loading = false;
-        state.doctors = action.payload.doctors;
-        state.stats = action.payload.stats;
+        Object.assign(state, action.payload);
       })
       .addCase(fetchAdminDoctors.rejected, (state, action) => {
         state.loading = false;

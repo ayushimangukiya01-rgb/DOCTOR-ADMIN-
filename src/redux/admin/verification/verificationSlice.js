@@ -1,22 +1,9 @@
-// src/redux/admin/verification/verificationSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  mockDoctorProfile,
-  mockProfessionalSummary,
-  mockSubmittedDocuments,
-  mockAuditTimeline,
-} from "../../../data/adminMockData";
+import { getData } from "../../../api/apiHandler";
 
 export const fetchAdminVerification = createAsyncThunk(
   "adminVerification/fetchAdminVerification",
-  async () => {
-    return {
-      doctorProfile: mockDoctorProfile,
-      professionalSummary: mockProfessionalSummary,
-      submittedDocuments: mockSubmittedDocuments,
-      auditTimeline: mockAuditTimeline,
-    };
-  }
+  async () => await getData("/admin/verification")
 );
 
 const verificationSlice = createSlice({
@@ -38,10 +25,7 @@ const verificationSlice = createSlice({
       })
       .addCase(fetchAdminVerification.fulfilled, (state, action) => {
         state.loading = false;
-        state.doctorProfile = action.payload.doctorProfile;
-        state.professionalSummary = action.payload.professionalSummary;
-        state.submittedDocuments = action.payload.submittedDocuments;
-        state.auditTimeline = action.payload.auditTimeline;
+        Object.assign(state, action.payload);
       })
       .addCase(fetchAdminVerification.rejected, (state, action) => {
         state.loading = false;

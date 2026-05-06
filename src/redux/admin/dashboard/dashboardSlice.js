@@ -1,24 +1,9 @@
-// src/redux/admin/dashboard/dashboardSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  mockAdminSummaryCards,
-  mockPlatformActivities,
-  mockQuickActions,
-  mockDoctorRequests,
-  mockTodayAppointments,
-} from "../../../data/adminMockData";
+import { getData } from "../../../api/apiHandler";
 
 export const fetchDashboard = createAsyncThunk(
   "adminDashboard/fetchDashboard",
-  async () => {
-    return {
-      summaryCards: mockAdminSummaryCards,
-      platformActivities: mockPlatformActivities,
-      quickActions: mockQuickActions,
-      doctorRequests: mockDoctorRequests,
-      todayAppointments: mockTodayAppointments,
-    };
-  }
+  async () => await getData("/admin/dashboard")
 );
 
 const dashboardSlice = createSlice({
@@ -41,11 +26,7 @@ const dashboardSlice = createSlice({
       })
       .addCase(fetchDashboard.fulfilled, (state, action) => {
         state.loading = false;
-        state.summaryCards = action.payload.summaryCards;
-        state.platformActivities = action.payload.platformActivities;
-        state.quickActions = action.payload.quickActions;
-        state.doctorRequests = action.payload.doctorRequests;
-        state.todayAppointments = action.payload.todayAppointments;
+        Object.assign(state, action.payload);
       })
       .addCase(fetchDashboard.rejected, (state, action) => {
         state.loading = false;

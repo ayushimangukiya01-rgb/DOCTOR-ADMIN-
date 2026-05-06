@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getData } from "../../../api/apiHandler";
 
-export const fetchAdminPatients = createAsyncThunk(
-  "adminPatients/fetchAdminPatients",
-  async () => await getData("/admin/patients")
+export const fetchDoctorPatients = createAsyncThunk(
+  "doctorPatients/fetchDoctorPatients",
+  async () => {
+    return await getData("/doctor/patients");
+  }
 );
 
-const patientSlice = createSlice({
-  name: "adminPatients",
+const doctorPatientsSlice = createSlice({
+  name: "doctorPatients",
   initialState: {
+    tableHeaders: [],
     patients: [],
     stats: [],
     loading: false,
@@ -17,19 +20,19 @@ const patientSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAdminPatients.pending, (state) => {
+      .addCase(fetchDoctorPatients.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAdminPatients.fulfilled, (state, action) => {
+      .addCase(fetchDoctorPatients.fulfilled, (state, action) => {
         state.loading = false;
         Object.assign(state, action.payload);
       })
-      .addCase(fetchAdminPatients.rejected, (state, action) => {
+      .addCase(fetchDoctorPatients.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
 
-export default patientSlice.reducer;
+export default doctorPatientsSlice.reducer;

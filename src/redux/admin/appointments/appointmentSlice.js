@@ -1,22 +1,9 @@
-// src/redux/admin/appointments/appointmentSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  mockAppointments,
-  mockAppointmentStats,
-  mockTopDoctors,
-  mockAppointmentTypes,
-} from "../../../data/adminMockData";
+import { getData } from "../../../api/apiHandler";
 
 export const fetchAdminAppointments = createAsyncThunk(
   "adminAppointments/fetchAdminAppointments",
-  async () => {
-    return {
-      appointments: mockAppointments,
-      stats: mockAppointmentStats,
-      topDoctors: mockTopDoctors,
-      appointmentTypes: mockAppointmentTypes,
-    };
-  }
+  async () => await getData("/admin/appointments")
 );
 
 const appointmentSlice = createSlice({
@@ -38,10 +25,7 @@ const appointmentSlice = createSlice({
       })
       .addCase(fetchAdminAppointments.fulfilled, (state, action) => {
         state.loading = false;
-        state.appointments = action.payload.appointments;
-        state.stats = action.payload.stats;
-        state.topDoctors = action.payload.topDoctors;
-        state.appointmentTypes = action.payload.appointmentTypes;
+        Object.assign(state, action.payload);
       })
       .addCase(fetchAdminAppointments.rejected, (state, action) => {
         state.loading = false;
