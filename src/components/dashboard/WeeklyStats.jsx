@@ -24,7 +24,7 @@ useEffect(() => {
   if (!weeklyStats || weeklyStats.length === 0) {
     dispatch(fetchDoctorDashboard());
   }
-}, [dispatch, weeklyStats]);
+}, [dispatch, weeklyStats?.length]);
   return (
     <CardContainer className="p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6">

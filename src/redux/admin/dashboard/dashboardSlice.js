@@ -10,8 +10,6 @@ const dashboardSlice = createSlice({
   name: "adminDashboard",
   initialState: {
     summaryCards: [],
-    platformActivities: [],
-    quickActions: [],
     doctorRequests: [],
     todayAppointments: [],
     loading: false,

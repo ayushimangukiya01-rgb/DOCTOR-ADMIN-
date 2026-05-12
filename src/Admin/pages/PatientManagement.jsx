@@ -1,10 +1,43 @@
 // src/Admin/pages/PatientManagement.jsx
-import React from "react";
+import React, { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import PatientStatsGrid from "../components/patients/PatientStatsGrid";
 import PatientTableControls from "../components/patients/PatientTableControls";
 import PatientsTable from "../components/patients/PatientsTable";
 
 const PatientManagement = () => {
+  const { patients } = useSelector((state) => state.adminPatients);
+
+  // FILTER STATE
+  const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState("All Statuses");
+  const [gender, setGender] = useState("Gender: All");
+  const [visitType, setVisitType] = useState("All Visit Types");
+
+  // FILTERED PATIENTS DATA
+  const filteredPatients = useMemo(() => {
+    return patients.filter((patient) => {
+      const searchValue = searchTerm.toLowerCase();
+
+      const matchSearch =
+        patient.name.toLowerCase().includes(searchValue) ||
+        patient.id.toLowerCase().includes(searchValue) ||
+        patient.phone.toLowerCase().includes(searchValue) ||
+        patient.email.toLowerCase().includes(searchValue);
+
+      const matchStatus =
+        status === "All Statuses" || patient.status === status;
+
+      const matchGender =
+        gender === "Gender: All" || patient.gender === gender;
+
+      const matchVisitType =
+        visitType === "All Visit Types" || patient.visitType === visitType;
+
+      return matchSearch && matchStatus && matchGender && matchVisitType;
+    });
+  }, [patients, searchTerm, status, gender, visitType]);
+
   return (
     <div className="w-full max-w-[1440px] mx-auto">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-8">
@@ -28,29 +61,23 @@ const PatientManagement = () => {
             users.
           </p>
         </div>
-
-        <div className="flex flex-col sm:flex-row gap-3">
-          <button className="flex items-center justify-center gap-2 px-4 py-2.5 border border-outline rounded-lg font-label-md hover:bg-surface-container transition-colors">
-            <span className="material-symbols-outlined text-[20px]">
-              file_download
-            </span>
-            Export List
-          </button>
-
-          {/* <button className="flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container shadow-sm active:scale-95 transition-all">
-            <span className="material-symbols-outlined text-[20px]">
-              person_add
-            </span>
-            Add New Patient
-          </button> */}
-        </div>
       </div>
 
       <PatientStatsGrid />
 
       <div className="bg-white rounded-xl border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.05)] overflow-hidden">
-        <PatientTableControls />
-        <PatientsTable />
+        <PatientTableControls
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          status={status}
+          setStatus={setStatus}
+          gender={gender}
+          setGender={setGender}
+          visitType={visitType}
+          setVisitType={setVisitType}
+        />
+
+        <PatientsTable filteredPatients={filteredPatients} />
       </div>
     </div>
   );

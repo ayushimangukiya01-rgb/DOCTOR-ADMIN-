@@ -17,6 +17,7 @@ import doctorPrescriptionReducer from "./doctor/prescription/doctorPrescriptionS
 
 
 
+
 export const store = configureStore({
   reducer: {                     
     dashboard: dashboardReducer,
@@ -34,6 +35,8 @@ export const store = configureStore({
     doctorEarnings: doctorEarningsReducer,
     doctorPatients: doctorPatientsReducer,
     doctorPrescription: doctorPrescriptionReducer,
+
+    
 
   },
 });

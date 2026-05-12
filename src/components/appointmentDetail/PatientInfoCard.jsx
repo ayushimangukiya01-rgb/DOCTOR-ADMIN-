@@ -40,9 +40,7 @@ const PatientInfoCard = () => {
         </div>
       </div>
 
-      <div className="pt-6 border-t border-slate-100">
-        <FullWidthButton icon="contact_page">View Full Profile</FullWidthButton>
-      </div>
+     
     </CardContainer>
   );
 };

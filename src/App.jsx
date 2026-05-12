@@ -1,6 +1,12 @@
 // src/App.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
+
 
 // Doctor Side Pages
 import DoctorLogin from "./pages/DoctorLogin";
@@ -23,9 +29,11 @@ import DoctorVerificationDetail from "./Admin/pages/DoctorVerificationDetail";
 import PatientManagement from "./Admin/pages/PatientManagement";
 import AppointmentManagement from "./Admin/pages/AppointmentManagement";
 import PaymentsPage from "./Admin/pages/PaymentsPage";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
+    <>
     <Routes>
       {/* Doctor Side */}
       <Route path="/login" element={<DoctorLogin />} />
@@ -39,6 +47,11 @@ const App = () => {
       <Route path="/availability" element={<Availability />} />
       <Route path="/profile-settings" element={<ProfileSettings />} />
       <Route path="/patients" element={<Patients />} />
+      
+    
+
+       {/* always keep this last */}
+  <Route path="*" element={<NotFound/>} />
 
       {/* Admin Side */}
       <Route
@@ -94,6 +107,8 @@ const App = () => {
   }
 />
     </Routes>
+     < ToastContainer position="top-right" autoClose={3000} />
+     </>
   );
 };
 

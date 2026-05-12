@@ -1,22 +1,43 @@
 // src/Admin/components/dashboard/RecentDoctorRequests.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TableContainer from "../../../common/layout/TableContainer";
 import TableHeaderCell from "../../../common/display/TableHeaderCell";
 import StatusBadge from "../../../common/display/StatusBadge";
 import IconButton from "../../../common/ui/IconButton";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDashboard } from "../../../redux/admin/dashboard/dashboardSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const RecentDoctorRequests = () => {
-const dispatch = useDispatch();
-const { doctorRequests } = useSelector((state) => state.dashboard);
+  // NAVIGATE
+const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { doctorRequests } = useSelector((state) => state.dashboard);
 
-useEffect(() => {
-  if (doctorRequests.length === 0) {
-    dispatch(fetchDashboard());
-  }
-}, [dispatch, doctorRequests.length]);
+  // PAGINATION STATE
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // PAGINATION LIMIT
+  const itemsPerPage = 5;
+
+  // PAGINATION TOTAL PAGES
+  const totalPages = Math.ceil(doctorRequests.length / itemsPerPage);
+
+  // PAGINATION START INDEX
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  // PAGINATION CURRENT DATA
+  const currentDoctors = doctorRequests.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  useEffect(() => {
+    if (doctorRequests.length === 0) {
+      dispatch(fetchDashboard());
+    }
+  }, [dispatch, doctorRequests.length]);
 
   return (
     <TableContainer variant="admin" className="min-w-0">
@@ -25,9 +46,12 @@ useEffect(() => {
           Recent Doctor Requests
         </h3>
 
-        <button className="shrink-0 text-primary text-[14px] font-semibold hover:underline">
-          View All
-        </button>
+        <button
+  onClick={() => navigate("/admin/doctors")}
+  className="shrink-0 text-primary text-[14px] font-semibold hover:underline"
+>
+  View All
+</button>
       </div>
 
       <div className="w-full overflow-x-auto">
@@ -37,16 +61,18 @@ useEffect(() => {
               <TableHeaderCell variant="admin">Doctor Name</TableHeaderCell>
               <TableHeaderCell variant="admin">Specialization</TableHeaderCell>
               <TableHeaderCell variant="admin">Experience</TableHeaderCell>
-              <TableHeaderCell variant="admin">Submission Date</TableHeaderCell>
+              <TableHeaderCell variant="admin">
+                Submission Date
+              </TableHeaderCell>
               <TableHeaderCell variant="admin">Status</TableHeaderCell>
               <TableHeaderCell variant="admin">Action</TableHeaderCell>
             </tr>
           </thead>
 
           <tbody className="divide-y divide-outline-variant/20">
-            {doctorRequests.map((doctor) => (
+            {currentDoctors.map((doctor, index) => (
               <tr
-                key={doctor.name}
+                key={`${doctor.name}-${index}`}
                 className="hover:bg-blue-50/30 transition-colors"
               >
                 <td className="px-6 py-4">
@@ -98,6 +124,34 @@ useEffect(() => {
           </tbody>
         </table>
       </div>
+
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-end gap-2 px-6 py-4 border-t border-outline-variant/20">
+          {/* PREVIOUS BUTTON */}
+          <button
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+            className="px-3 py-1 rounded-md border text-sm disabled:opacity-40"
+          >
+            Prev
+          </button>
+
+          {/* PAGE NUMBER */}
+          <span className="text-sm font-medium">
+            {currentPage} / {totalPages}
+          </span>
+
+          {/* NEXT BUTTON */}
+          <button
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 rounded-md border text-sm disabled:opacity-40"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </TableContainer>
   );
 };

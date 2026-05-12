@@ -1,11 +1,50 @@
 // src/Admin/pages/DoctorManagement.jsx
-import React from "react";
+import React, { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import DoctorStatsGrid from "../components/doctors/DoctorStatsGrid";
 import DoctorFilters from "../components/doctors/DoctorFilters";
 import DoctorsTable from "../components/doctors/DoctorsTable";
-import StaffReportCTA from "../components/doctors/StaffReportCTA";
 
 const DoctorManagement = () => {
+  const { doctors } = useSelector((state) => state.adminDoctors);
+
+  // FILTER STATE
+  const [searchTerm, setSearchTerm] = useState("");
+  const [specialization, setSpecialization] = useState("All Specializations");
+  const [status, setStatus] = useState("All");
+  const [experience, setExperience] = useState("All Experience");
+
+  // FILTERED DOCTORS DATA
+  const filteredDoctors = useMemo(() => {
+    return doctors.filter((doctor) => {
+      const searchValue = searchTerm.toLowerCase();
+
+      const matchSearch =
+        doctor.name.toLowerCase().includes(searchValue) ||
+        doctor.id.toLowerCase().includes(searchValue) ||
+        doctor.specialization.toLowerCase().includes(searchValue);
+
+      const matchSpecialization =
+        specialization === "All Specializations" ||
+        doctor.specialization === specialization;
+
+      const matchStatus =
+        status === "All" ||
+        doctor.status.toLowerCase().replaceAll("-", " ").trim() ===
+          status.toLowerCase().trim();
+
+      const doctorExperienceNumber = parseInt(doctor.experience);
+
+      const matchExperience =
+        experience === "All Experience" ||
+        doctorExperienceNumber >= parseInt(experience);
+
+      return (
+        matchSearch && matchSpecialization && matchStatus && matchExperience
+      );
+    });
+  }, [doctors, searchTerm, specialization, status, experience]);
+
   return (
     <div className="w-full max-w-[1440px] mx-auto space-y-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -17,17 +56,22 @@ const DoctorManagement = () => {
             Manage medical staff, schedules, and practitioner credentials.
           </p>
         </div>
-{/* 
-        <button className="bg-primary hover:bg-primary/90 text-on-primary px-6 py-2 rounded-lg flex items-center justify-center gap-2 transition-all font-label-md text-label-md shadow-sm">
-          <span className="material-symbols-outlined">add</span>
-          Register New Doctor
-        </button> */}
       </div>
 
       <DoctorStatsGrid />
-      <DoctorFilters />
-      <DoctorsTable />
-      <StaffReportCTA />
+
+      <DoctorFilters
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        specialization={specialization}
+        setSpecialization={setSpecialization}
+        status={status}
+        setStatus={setStatus}
+        experience={experience}
+        setExperience={setExperience}
+      />
+
+      <DoctorsTable filteredDoctors={filteredDoctors} />
     </div>
   );
 };

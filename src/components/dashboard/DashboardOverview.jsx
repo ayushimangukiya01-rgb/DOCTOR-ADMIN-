@@ -1,77 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PageHeader from "../../common/typography/PageHeader";
 import ActionButton from "../../common/ui/ActionButton";
 import Card from "../../common/card/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { fetchDoctorDashboard } from "../../redux/doctor/dashboard/doctorDashboardSlice";
 
-// const stats = [
-//   {
-//     icon: "calendar_month",
-//     iconBg: "bg-blue-50",
-//     iconColor: "text-blue-600",
-//     badge: "+12%",
-//     badgeClass: "text-[#006e2f] bg-[#6bff8f]/10",
-//     label: "Total Appointments",
-//     value: "1,284",
-//   },
-//   {
-//     icon: "group",
-//     iconBg: "bg-emerald-50",
-//     iconColor: "text-emerald-600",
-//     badge: "Daily",
-//     badgeClass: "bg-[#e7e7f3]",
-//     label: "Today’s Patients",
-//     value: "12",
-//   },
-//   {
-//     icon: "pending_actions",
-//     iconBg: "bg-amber-50",
-//     iconColor: "text-amber-600",
-//     badge: "Urgent: 2",
-//     badgeClass: "text-red-600 bg-red-50",
-//     label: "Pending Consults",
-//     value: "08",
-//   },
-//   {
-//     icon: "account_balance_wallet",
-//     iconBg: "bg-indigo-50",
-//     iconColor: "text-indigo-600",
-//     badge: "This Month",
-//     badgeClass: "text-[#006e2f] bg-[#6bff8f]/10",
-//     label: "Earnings",
-//     value: "$14.2k",
-//   },
-// ];
-
 const DashboardOverview = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-const { stats, header } = useSelector((state) => state.doctorDashboard);
 
-useEffect(() => {
-  if (stats.length === 0) {
-    dispatch(fetchDoctorDashboard());
-  }
-}, [dispatch, stats.length]);
+  const { stats, header } = useSelector((state) => state.doctorDashboard);
+
+  useEffect(() => {
+    if (stats.length === 0) {
+      dispatch(fetchDoctorDashboard());
+    }
+  }, [dispatch, stats.length]);
+
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 pt-6 lg:pt-8">
       <div className="max-w-7xl mx-auto space-y-6 lg:space-y-8">
-      <div className="flex flex-col xl:flex-row xl:justify-between xl:items-center gap-5">
-         <PageHeader
-  title={header.title}
-  subtitle={header.subtitle}
-/>
+        <div className="flex flex-col xl:flex-row xl:justify-between xl:items-center gap-5">
+          <PageHeader title={header.title} subtitle={header.subtitle} />
 
           <div className="flex flex-col sm:flex-row gap-3 w-full xl:w-auto">
-            <ActionButton variant="outline">
+            <ActionButton
+              variant="outline"
+              onClick={() => navigate("/availability")}
+            >
               <span className="material-symbols-outlined text-[18px]">
                 add_circle
               </span>
               Add Availability
             </ActionButton>
 
-            <ActionButton variant="primary">
+            <ActionButton
+              variant="primary"
+              onClick={() => navigate("/appointments")}
+            >
               <span className="material-symbols-outlined text-[18px]">
                 videocam
               </span>

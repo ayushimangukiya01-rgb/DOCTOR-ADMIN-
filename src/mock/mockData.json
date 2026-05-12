@@ -56,49 +56,8 @@
     "trendClass": "text-error"
   }
       ],
-      "platformActivities": [
-  {
-    "icon": "verified_user",
-    "title": "New Doctor Verified",
-    "description": "Dr. Alan Turing was approved for Neurosurgery",
-    "time": "2 hours ago",
-    "iconClass": "bg-blue-50 text-primary border border-blue-100"
-  },
-  {
-    "icon": "report_problem",
-    "title": "Urgent Ticket Raised",
-    "description": "Payment gateway timeout reported by Patient ID #4292",
-    "time": "5 hours ago",
-    "iconClass": "bg-orange-50 text-orange-600 border border-orange-100"
-  },
-  {
-    "icon": "monitoring",
-    "title": "Monthly Analytics Ready",
-    "description": "The performance report for October is now available",
-    "time": "Yesterday",
-    "iconClass": "bg-purple-50 text-purple-600 border border-purple-100"
-  }
-],
-      "quickActions": [ 
-         {
-    "label": "Add Doctor",
-    "icon": "person_add",
-    "primary": true
-  },
-  {
-    "label": "Generate Report",
-    "icon": "receipt_long"
-  },
-  {
-    "label": "Broadcast Message",
-    "icon": "mail"
-  },
-  {
-    "label": "System Config",
-    "icon": "settings"
-  }
 
-      ],
+  
       "doctorRequests": [
 
          {
@@ -110,6 +69,108 @@
     "image":
       "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
   },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+        {
+    "name": "Dr. Sarah Chen",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "date": "Oct 24, 2023",
+    "status": "Pending",
+    "image":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBoUGjStZj7C3jOAQICv-YXwoFhPz4JBV3rmA8BJPJ-gxJ32Ozn7iZA_Zg1mRMvF0G7eF6tO72CF-MsEFNIvNKhbBks96SIEdTPJiHKsdBOHYys-sPp15wfqU07zWA27XnuYSVg7QRehRlO6BLaprlypbpPSexd8ufxM9ZL1ZLERZnVrCICXM_i7390Y_MjQRb43by-gRjGPPoHymeICoYOGRaqgquWCFT9QB6MBmyYN1H4tLkKn7IY7bc_y4X4fjYNgDVFl9R3HSEM"
+  },
+   
+  
+  
   {
     "name": "Dr. James  Wilson",
     "specialization": "Neurology",
@@ -125,14 +186,40 @@
     "patient": "Robert Fox",
     "doctor": "Dr. Sarah Chen",
     "time": "09:30 AM",
-    "type": "Routine Checkup",
+    "type": "Chat Follow-up",
     "status": "Confirmed"
   },
   {
     "patient": "Jane Cooper",
     "doctor": "Dr. James Wilson",
     "time": "11:00 AM",
-    "type": "Emergency Consultation",
+    "type": "Message",
+    "status": "In Progress"
+  },
+   {
+    "patient": "Jane Cooper",
+    "doctor": "Dr. James Wilson",
+    "time": "11:00 AM",
+    "type": "Chat Follow-up",
+    "status": "In Progress"
+  },
+   {
+    "patient": "Jane Cooper",
+    "doctor": "Dr. James Wilson",
+    "time": "11:00 AM",
+    "type": "Video Call",
+    "status": "In Progress"
+  }, {
+    "patient": "Jane Cooper",
+    "doctor": "Dr. James Wilson",
+    "time": "11:00 AM",
+    "type": "Video Call",
+    "status": "In Progress"
+  }, {
+    "patient": "Jane Cooper",
+    "doctor": "Dr. James Wilson",
+    "time": "11:00 AM",
+    "type": "Video Call",
     "status": "In Progress"
   }
       ]
@@ -144,6 +231,36 @@
          {
     "name": "Dr. James Wilson",
     "id": "DOC-9821-W",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "status": "Approve-Doctor",
+    "fee": "$180.00",
+    "avatar":     
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCU__blwIXlrMpH8DCEUqfftv37KoppmfYIS-eiWLfssu46ldqzq17xA2jFUK6QjblSZyi7vnpLmDoyCa4nBJf8_kNdvZU5feV3dpANtM5pAujLA5_x62FW1s11XXchetUelM5ihQoEArHvhW77aS--rxfrwXFqz6X3hKw4_xRbchwP29p4c6eXdo17RltdpYyTO8li3DOPriUaMSDyjMBJe9IIqTxEKXDe24drDOuDPbh-6pngYxYlHCzXd88ErqiME2OiPQgFUDNG"
+  },
+    {
+    "name": "Dr. James Wilson",
+    "id": "DOC-9822-W",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "status": "Approve-Doctor",
+    "fee": "$180.00",
+    "avatar":     
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCU__blwIXlrMpH8DCEUqfftv37KoppmfYIS-eiWLfssu46ldqzq17xA2jFUK6QjblSZyi7vnpLmDoyCa4nBJf8_kNdvZU5feV3dpANtM5pAujLA5_x62FW1s11XXchetUelM5ihQoEArHvhW77aS--rxfrwXFqz6X3hKw4_xRbchwP29p4c6eXdo17RltdpYyTO8li3DOPriUaMSDyjMBJe9IIqTxEKXDe24drDOuDPbh-6pngYxYlHCzXd88ErqiME2OiPQgFUDNG"
+  },
+    {
+    "name": "Dr. James Wilson",
+    "id": "DOC-9823-W",
+    "specialization": "Cardiology",
+    "experience": "12 Years",
+    "status": "Approve-Doctor",
+    "fee": "$180.00",
+    "avatar":     
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCU__blwIXlrMpH8DCEUqfftv37KoppmfYIS-eiWLfssu46ldqzq17xA2jFUK6QjblSZyi7vnpLmDoyCa4nBJf8_kNdvZU5feV3dpANtM5pAujLA5_x62FW1s11XXchetUelM5ihQoEArHvhW77aS--rxfrwXFqz6X3hKw4_xRbchwP29p4c6eXdo17RltdpYyTO8li3DOPriUaMSDyjMBJe9IIqTxEKXDe24drDOuDPbh-6pngYxYlHCzXd88ErqiME2OiPQgFUDNG"
+  },
+    {
+    "name": "Dr. James Wilson",
+    "id": "DOC-9824-W",
     "specialization": "Cardiology",
     "experience": "12 Years",
     "status": "Approve-Doctor",
@@ -219,6 +336,32 @@
          {
     "name": "Eleanor Pena",
     "id": "MED-99201",
+    "age": "34 Years",
+    "gender": "Female",
+    "phone": "(209) 555-0104",
+    "email": "eleanor.p@example.com",
+    "lastVisit": "Oct 12, 2023",
+    "visitType": "General Checkup",
+    "status": "Stable",
+    "statusClass": "bg-green-100 text-green-700",
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuAX75CvWmaYUZg9o9j0rRSAb06AQ7n_SL4Yx-mQ1RLnpW3j7gpJIn-nO2aRH6Fun0HY6GRUs1YGegUCE74WbneOa-qgUaWld9GF9QczHl3s3819OevEk9mkSjxBxEEs02ppJ_dqwclZC0VjEtNJm74RqeuIfNfWMG-MksSanj3A4ZDTIXAeVp5OUXu-fCM0ePt3iV1emuNX6SRgvJexrIaQly7gyw8_Xaertv65QPnJF1h1OXE5mE-yOYfJ8WVwGdJBelRrB_aqH6Qu"
+  },
+         {
+    "name": "Eleanor Pena",
+    "id": "MED-99801",
+    "age": "34 Years",
+    "gender": "Female",
+    "phone": "(209) 555-0104",
+    "email": "eleanor.p@example.com",
+    "lastVisit": "Oct 12, 2023",
+    "visitType": "General Checkup",
+    "status": "Stable",
+    "statusClass": "bg-green-100 text-green-700",
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuAX75CvWmaYUZg9o9j0rRSAb06AQ7n_SL4Yx-mQ1RLnpW3j7gpJIn-nO2aRH6Fun0HY6GRUs1YGegUCE74WbneOa-qgUaWld9GF9QczHl3s3819OevEk9mkSjxBxEEs02ppJ_dqwclZC0VjEtNJm74RqeuIfNfWMG-MksSanj3A4ZDTIXAeVp5OUXu-fCM0ePt3iV1emuNX6SRgvJexrIaQly7gyw8_Xaertv65QPnJF1h1OXE5mE-yOYfJ8WVwGdJBelRrB_aqH6Qu"
+  },
+         {
+    "name": "Eleanor Pena",
+    "id": "MED-99901",
     "age": "34 Years",
     "gender": "Female",
     "phone": "(209) 555-0104",
@@ -311,6 +454,46 @@
          {
     "patient": "James Davenport",
     "patientId": "P-90231",
+    "patientInitial": "JD",
+    "patientAvatar": "",
+    "patientBg": "bg-blue-100 text-primary",
+    "doctor": "Dr. Robert Chen",
+    "doctorAvatar":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDWhTnjgMd_rWP2XbaV9oRZoedv1COSIDjbBcuTIwR0r_Fd35quLuS_Svg3vLOyFGYYnIWdsQV_yqX2xUucRARCDj8mKO3PFKsIoEoNs1MDBZHWM5Pqi2TwNdspyvth7T9Bij9gZiaNbx6JHQ6q3Y-ea-gSrXjCyeqpixxizZ6J2VPhYF_kzBYxVeApzJ_V8wsGAMCm3UMQ5wyadwPS8s7vxMb-azQkaZwtO-z81XzZToCd_IhYGbVXFXhr_n1oYFJXhXYTsW5ThGGF",
+    "date": "Oct 24, 2023",
+    "time": "09:30 AM",
+    "type": "Chat Follow-up",
+    "typeClass": "bg-blue-50 text-blue-700 border-blue-100",
+    "paymentIcon": "check_circle",
+    "paymentIconClass": "text-tertiary",
+    "payment": "$120.00",
+    "status": "Confirmed",
+    "statusClass": "bg-tertiary-fixed/20 text-tertiary border-tertiary/20",
+    "dotClass": "bg-tertiary"
+  },
+          {
+    "patient": "James Davenport",
+    "patientId": "P-902311",
+    "patientInitial": "JD",
+    "patientAvatar": "",
+    "patientBg": "bg-blue-100 text-primary",
+    "doctor": "Dr. Robert Chen",
+    "doctorAvatar":
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDWhTnjgMd_rWP2XbaV9oRZoedv1COSIDjbBcuTIwR0r_Fd35quLuS_Svg3vLOyFGYYnIWdsQV_yqX2xUucRARCDj8mKO3PFKsIoEoNs1MDBZHWM5Pqi2TwNdspyvth7T9Bij9gZiaNbx6JHQ6q3Y-ea-gSrXjCyeqpixxizZ6J2VPhYF_kzBYxVeApzJ_V8wsGAMCm3UMQ5wyadwPS8s7vxMb-azQkaZwtO-z81XzZToCd_IhYGbVXFXhr_n1oYFJXhXYTsW5ThGGF",
+    "date": "Oct 24, 2023",
+    "time": "09:30 AM",
+    "type": "Chat Follow-up",
+    "typeClass": "bg-blue-50 text-blue-700 border-blue-100",
+    "paymentIcon": "check_circle",
+    "paymentIconClass": "text-tertiary",
+    "payment": "$120.00",
+    "status": "Confirmed",
+    "statusClass": "bg-tertiary-fixed/20 text-tertiary border-tertiary/20",
+    "dotClass": "bg-tertiary"
+  },
+          {
+    "patient": "James Davenport",
+    "patientId": "P-902231",
     "patientInitial": "JD",
     "patientAvatar": "",
     "patientBg": "bg-blue-100 text-primary",
@@ -481,6 +664,36 @@
   },
   {
     "date": "Oct 24, 2023",
+    "time": "09:42 AM",
+    "doctor": "Dr. Sarah Adams",
+    "department": "Cardiology",
+    "doctorInitial": "SA",
+    "patient": "Robert Fox",
+    "patientId": "#PAT-8821",
+    "amount": "$450.00",
+    "commission": "$67.50",
+    "rate": "15%",
+    "status": "COMPLETED",
+    "statusClass": "bg-tertiary-fixed text-on-tertiary-fixed-variant",
+    "dotClass": "bg-tertiary"
+  },
+  {
+    "date": "Oct 24, 2023",
+    "time": "09:42 AM",
+    "doctor": "Dr. Sarah Adams",
+    "department": "Cardiology",
+    "doctorInitial": "SA",
+    "patient": "Robert Fox",
+    "patientId": "#PAT-8821",
+    "amount": "$450.00",
+    "commission": "$67.50",
+    "rate": "15%",
+    "status": "COMPLETED",
+    "statusClass": "bg-tertiary-fixed text-on-tertiary-fixed-variant",
+    "dotClass": "bg-tertiary"
+  },
+  {
+    "date": "Oct 24, 2023",
     "time": "11:15 AM",
     "doctor": "Dr. James Miller",
     "department": "Neurology",
@@ -573,27 +786,6 @@
     "meta": "Specialty Certificate • 3.2 MB",
     "icon": "verified",
     "placeholder": "Board_Certificate.pdf"
-  }
-      ],
-      "auditTimeline": [
-        {
-    "title": "Application Submitted",
-    "description": "Dr. Sarah Jenkins uploaded 4 documents for review.",
-    "time": "Oct 24, 2023 • 10:45 AM",
-    "color": "bg-tertiary"
-  },
-  {
-    "title": "Auto-Verification Passed",
-    "description":
-      "AI System successfully matched license details with state database.",
-    "time": "Oct 24, 2023 • 10:46 AM",
-    "color": "bg-primary"
-  },
-  {
-    "title": "Assigned to Auditor",
-    "description": "Case moved to Admin Smith's queue for final manual check.",
-    "time": "Oct 25, 2023 • 09:12 AM",
-    "color": "bg-secondary-fixed-dim"
   }
       ]
     }
@@ -698,8 +890,8 @@
   { "day": "WED", "height": "h-full" },
   { "day": "THU", "height": "h-2/3" },
   { "day": "FRI", "height": "h-4/5" },
-  { "day": "SAT", "empty": true },
-  { "day": "SUN", "empty": true }
+ { "day": "SAT", "height": "h-4/5" },
+{ "day": "SUN", "height": "h-1/3" }
 ]
   },
 
@@ -712,6 +904,7 @@
         "iconBg": "bg-blue-50",
         "iconColor": "text-blue-600"
       },
+      
       {
         "icon": "video_chat",
         "label": "Video Call",
@@ -748,6 +941,30 @@
     "status": "Confirmed"
   },
   {
+    "name": "Sarah Jenkins",
+    "id": "#PJ9301",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDEMq96YRR-j7xsfNfVyCaGwZA0_WMmis8jLE_zlBP85Ig13NbM75dykyzbmvoMBLHkx8ym_lBdeXeiP_9cb1mMP7bTb4P3-VL5CLa8zXQxS7jvEVnl7nLMj-fFJxU8UhyHEfrGgT7VC31lpqfWr1oDIqKPohC85xwtSUr7rlFb6kN81Xo7iNgXwgUQdlI5toRyCAiN_DvdFUJCqrYGTAoANlmQsqCDEe-hnaM-J1xJ4dTWX-RCKS03skUVJOrevFWbrL_VliIIINzb",
+    "date": "Oct 24, 2023",
+    "time": "10:30 AM - 11:00 AM",
+    "type": "Video Call",
+    "icon": "videocam",
+    "typeBg": "bg-blue-50",
+    "typeColor": "text-blue-600",
+    "status": "Confirmed"
+  },
+  {
+    "name": "Sarah Jenkins",
+    "id": "#PJ6201",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDEMq96YRR-j7xsfNfVyCaGwZA0_WMmis8jLE_zlBP85Ig13NbM75dykyzbmvoMBLHkx8ym_lBdeXeiP_9cb1mMP7bTb4P3-VL5CLa8zXQxS7jvEVnl7nLMj-fFJxU8UhyHEfrGgT7VC31lpqfWr1oDIqKPohC85xwtSUr7rlFb6kN81Xo7iNgXwgUQdlI5toRyCAiN_DvdFUJCqrYGTAoANlmQsqCDEe-hnaM-J1xJ4dTWX-RCKS03skUVJOrevFWbrL_VliIIINzb",
+    "date": "Oct 24, 2023",
+    "time": "10:30 AM - 11:00 AM",
+    "type": "Video Call",
+    "icon": "videocam",
+    "typeBg": "bg-blue-50",
+    "typeColor": "text-blue-600",
+    "status": "Confirmed"
+  },
+  {
     "name": "Michael Ross",
     "id": "#PJ9205",
     "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDvgAmytw7nAUgmNbPp0SdjRqArzGcdcXWpr_2xvlk585Vy-CUC6gMYKJ-4Ybf6D6Kc7I7oCedpLOuS_C1tyUdlIF7fXWyiP21SU4rS9Dg7lM8FhnN5EHHFI1CWqUhVNIcRD9d0LjrT3BiVsdPNpv564GpTgAM9JBvenqPuuGrmkbmBKjLlmma9fesIwyH10Qhx2SjAX0NyM3Kt-V0qEZGJMtObw389BVXgAKd6UsDi7FAENaKu6soPLxqjxn6ICd021JTHaXl3XCrW",
@@ -774,6 +991,18 @@
   {
     "name": "David Chang",
     "id": "#PJ9212",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDyTRZOPlHyVQM0tkF5hvIJXxG819mmeQTwMyNEEz7yvwKxmDiJEwGFy-4PbnGiRosMDvM9KAJXKdwQMzpeUkkdtIVLVuP5Lp0GdASrJjZACYCdMFRwgfwDNhaf_XvWd0dUolRISbWq50PgWpZDs100RPN4yd3wr6U6A46bld4jz24_Gz2dYKrNWJjsVUSbun7vAPhG2KaKiGeLt-cvKYg5tEe0AH0cO6_b0TsWzrvqgqt8_kPSIiYUyAl3o-_p6XJGmGH6coycTjL4",
+    "date": "Oct 24, 2023",
+    "time": "02:30 PM - 03:00 PM",
+    "type": "Video Call",
+    "icon": "videocam",
+    "typeBg": "bg-blue-50",
+    "typeColor": "text-blue-600",
+    "status": "Cancelled"
+  },
+  {
+    "name": "David Chang",
+    "id": "#PJ9612",
     "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDyTRZOPlHyVQM0tkF5hvIJXxG819mmeQTwMyNEEz7yvwKxmDiJEwGFy-4PbnGiRosMDvM9KAJXKdwQMzpeUkkdtIVLVuP5Lp0GdASrJjZACYCdMFRwgfwDNhaf_XvWd0dUolRISbWq50PgWpZDs100RPN4yd3wr6U6A46bld4jz24_Gz2dYKrNWJjsVUSbun7vAPhG2KaKiGeLt-cvKYg5tEe0AH0cO6_b0TsWzrvqgqt8_kPSIiYUyAl3o-_p6XJGmGH6coycTjL4",
     "date": "Oct 24, 2023",
     "time": "02:30 PM - 03:00 PM",
@@ -975,7 +1204,31 @@
       "email": "sarah.j@email.com",
       "lastVisit": "27 Apr 2024",
       "condition": "Hypertension",
-      "status": "Follow-up",
+      "status": "Chat-Follow-up",
+      "img": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+     {
+      "id": "P-1501",
+      "name": "Sarah Johnson",
+      "age": 28,
+      "gender": "Female",
+      "phone": "(555) 123-4567",
+      "email": "sarah.j@email.com",
+      "lastVisit": "27 Apr 2024",
+      "condition": "Hypertension",
+      "status": "Video Call-Follow-up",
+      "img": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+     {
+      "id": "P-1901",
+      "name": "Sarah Johnson",
+      "age": 28,
+      "gender": "Female",
+      "phone": "(555) 123-4567",
+      "email": "sarah.j@email.com",
+      "lastVisit": "27 Apr 2024",
+      "condition": "Hypertension",
+      "status": "Video Call",
       "img": "https://randomuser.me/api/portraits/women/44.jpg"
     },
     {
@@ -987,7 +1240,7 @@
       "email": "michael.b@email.com",
       "lastVisit": "25 Apr 2024",
       "condition": "Diabetes Type 2",
-      "status": "Stable",
+      "status": "Video Call",
       "img": "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
@@ -999,7 +1252,7 @@
       "email": "emily.d@email.com",
       "lastVisit": "23 Apr 2024",
       "condition": "Asthma",
-      "status": "Stable",
+      "status": "Message",
       "img": "https://randomuser.me/api/portraits/women/65.jpg"
     },
     {
@@ -1011,7 +1264,7 @@
       "email": "linda.w@email.com",
       "lastVisit": "21 Apr 2024",
       "condition": "Arthritis",
-      "status": "Follow-up",
+      "status": "Chat Follow-up",
       "img": "https://randomuser.me/api/portraits/women/70.jpg"
     },
     {
@@ -1023,7 +1276,7 @@
       "email": "david.l@email.com",
       "lastVisit": "20 Apr 2024",
       "condition": "Heart Disease",
-      "status": "Critical",
+      "status": "Message",
       "img": "https://randomuser.me/api/portraits/men/75.jpg"
     }
   ],

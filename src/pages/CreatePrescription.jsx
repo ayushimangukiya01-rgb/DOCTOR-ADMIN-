@@ -9,6 +9,15 @@ import PrescriptionNotesActions from "../components/prescription/PrescriptionNot
 
 const CreatePrescription = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+   // ✅ NEW: main prescription form state
+  const [prescriptionForm, setPrescriptionForm] = useState({
+    diagnosis: "",
+    precautions: "",
+    doctorNotes: "",
+  });
+
+  // ✅ NEW: form validation errors
+  const [formErrors, setFormErrors] = useState({});
 
   return (
     <div className="bg-[#F8FAFC] min-h-screen flex">
@@ -34,10 +43,19 @@ const CreatePrescription = () => {
             </div>
 
             <PatientSummaryCard />
-            <DiagnosisForm />
+            <DiagnosisForm
+  prescriptionForm={prescriptionForm}
+  setPrescriptionForm={setPrescriptionForm}
+  formErrors={formErrors}
+/>
             <MedicationPlan />
             <PrescriptionExtraDetails />
-            <PrescriptionNotesActions />
+            <PrescriptionNotesActions
+  prescriptionForm={prescriptionForm}
+  setPrescriptionForm={setPrescriptionForm}
+  formErrors={formErrors}
+  setFormErrors={setFormErrors}
+/>
 
             <footer className="pt-8 pb-4 text-center border-t border-slate-100">
               <p className="text-xs font-semibold tracking-[0.05em] uppercase text-slate-400">

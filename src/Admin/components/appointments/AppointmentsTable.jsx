@@ -1,104 +1,56 @@
 // src/Admin/components/appointments/AppointmentsTable.jsx
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TableContainer from "../../../common/layout/TableContainer";
-import { useEffect } from "react";
 import { fetchAdminAppointments } from "../../../redux/admin/appointments/appointmentSlice";
-// const appointments = [
-//   {
-//     patient: "James Davenport",
-//     patientId: "P-90231",
-//     patientInitial: "JD",
-//     patientAvatar: "",
-//     patientBg: "bg-blue-100 text-primary",
-//     doctor: "Dr. Robert Chen",
-//     doctorAvatar:
-//       "https://lh3.googleusercontent.com/aida-public/AB6AXuDWhTnjgMd_rWP2XbaV9oRZoedv1COSIDjbBcuTIwR0r_Fd35quLuS_Svg3vLOyFGYYnIWdsQV_yqX2xUucRARCDj8mKO3PFKsIoEoNs1MDBZHWM5Pqi2TwNdspyvth7T9Bij9gZiaNbx6JHQ6q3Y-ea-gSrXjCyeqpixxizZ6J2VPhYF_kzBYxVeApzJ_V8wsGAMCm3UMQ5wyadwPS8s7vxMb-azQkaZwtO-z81XzZToCd_IhYGbVXFXhr_n1oYFJXhXYTsW5ThGGF",
-//     date: "Oct 24, 2023",
-//     time: "09:30 AM",
-//     type: "Chat Follow-up",
-//     typeClass: "bg-blue-50 text-blue-700 border-blue-100",
-//     paymentIcon: "check_circle",
-//     paymentIconClass: "text-tertiary",
-//     payment: "$120.00",
-//     status: "Confirmed",
-//     statusClass: "bg-tertiary-fixed/20 text-tertiary border-tertiary/20",
-//     dotClass: "bg-tertiary",
-//   },
-//   {
-//     patient: "Elena Rodriguez",
-//     patientId: "P-90442",
-//     patientAvatar:
-//       "https://lh3.googleusercontent.com/aida-public/AB6AXuApTMAxdO4l2tUmJDrgEJ83z7pTYEmptr5zoftVNgGODHBiEN_denGEzdK2O4Xpks8u9niblbntsuxQTNN14A0xhxQk4VKMA0Ywe_5n-R3tTn4a21aymKrSwIvw7CCKWz6KzVTTr71XCfluRFd2TDNgsbdkqkA8mUdlE2XW6qILcbchBz9yRFGyML5KYOfqXjLA8wmKPEVESz4eiVkYbdaY-2Ak6p5Q70DlIure7C7VYegbzXhFJrLptCgOGfvFma_B58btXEUY7ODM",
-//     doctor: "Dr. Sarah Kostic",
-//     doctorInitial: "SK",
-//     date: "Oct 24, 2023",
-//     time: "11:15 AM",
-//     type: "Video Call",
-//     typeClass: "bg-secondary-container text-on-secondary-container border-outline-variant",
-//     paymentIcon: "pending",
-//     paymentIconClass: "text-error",
-//     payment: "$250.00",
-//     status: "In Progress",
-//     statusClass: "bg-primary-fixed/30 text-primary border-primary/20",
-//     dotClass: "bg-primary",
-//   },
-//   {
-//     patient: "Marcus Bennett",
-//     patientId: "P-90881",
-//     patientInitial: "MB",
-//     patientAvatar: "",
-//     patientBg: "bg-tertiary-fixed-dim/40 text-tertiary",
-//     doctor: "Dr. Lisa Thorne",
-//     doctorAvatar:
-//       "https://lh3.googleusercontent.com/aida-public/AB6AXuAlylrkC2SEiDuSrf4f1XK6inAtL613tCu7vwJQKJm9k3_osBOZVmwlOdbQN4T1VBTle0dxz8tA3sC-BehWITAPYbhL22i7F4jGGjOQ_L8Gq66zv_tkONi8MKrRRnkhKe6rEFr3S8HDons-vV5nfS4jUDIe2_VDux7S0WiaXgZLgxnQCdU7JJCXaZn8yoN4Wbl41qCCZMq0IM9btbXlRgZE90-WgbuyN8MyITj3geyZ4xpaz267VvTr9W5PV2N49K1Nlb2rIV--OA58",
-//     date: "Oct 24, 2023",
-//     time: "02:00 PM",
-//     type: "Message",
-//     typeClass: "bg-error-container text-on-error-container border-error/10",
-//     paymentIcon: "check_circle",
-//     paymentIconClass: "text-tertiary",
-//     payment: "$400.00",
-//     status: "Pending",
-//     statusClass: "bg-surface-variant text-on-surface-variant border-outline-variant",
-//     dotClass: "bg-gray-400",
-//   },
-//   {
-//     patient: "Samuel Thompson",
-//     patientId: "P-90554",
-//     patientAvatar:
-//       "https://lh3.googleusercontent.com/aida-public/AB6AXuDxaeEX4-gC6FJNqWxl2_pZ9MjYG-RWBL9I_y6mhBpNxob9lT9boTh2qrqClzRvjD0304JQ5HTc5lBcDWRe17f7S7DHj95hOMcbTXq6ter1DxU3VEdJArpGU35-3dWai_ZioowaLDzswP-DRuVgMgcpXu9mzOoII4QyaXd2SrP7l4HuI55vmXAbl2c_qNLLsQ7PGAkSa23g1xQZ7SIuzhWzLuKhs_SnjFvP0D4FGU00tglQSJagVGMoHhf1UopLZGBXpC25_GmAD8XY",
-//     doctor: "Dr. David Miller",
-//     doctorAvatar:
-//       "https://lh3.googleusercontent.com/aida-public/AB6AXuAzM58eB55n6CCFx8z4_-G9TsM88QssnOQTB2v_2YCn1f1XcbGBu70bEU1v561TWRW8fFAQFyBA2_Dth00922lSRf18mfSb5k-6Zkx2wV1pp6JzjF3YXZnTXr5RcBmNczgbHlU7AbggLMczDSJzYD7Ch45EppIZZGYZfyOSAYRQPJXSoZK7KeC1FrXnRh3zdLn7O_h4WyGrjO9-8zgbV9qAeCua3aiBYzzakUSLvzJH8WLVyvoZhKz5xR_AI37REM3YB06XrVIwp1Ht",
-//     date: "Oct 24, 2023",
-//     time: "03:45 PM",
-//     type: "Video Call",
-//     typeClass: "bg-blue-50 text-blue-700 border-blue-100",
-//     paymentIcon: "check_circle",
-//     paymentIconClass: "text-tertiary",
-//     payment: "$85.00",
-//     status: "Confirmed",
-//     statusClass: "bg-tertiary-fixed/20 text-tertiary border-tertiary/20",
-//     dotClass: "bg-tertiary",
-//   },
-// ];
 
-const AppointmentsTable = () => {
+const AppointmentsTable = ({ filteredAppointments }) => {
   const dispatch = useDispatch();
-const { appointments } = useSelector((state) => state.adminAppointments);
+  const { appointments } = useSelector((state) => state.adminAppointments);
 
-useEffect(() => {
-  if (appointments.length === 0) {
-    dispatch(fetchAdminAppointments());
-  }
-}, [dispatch, appointments.length]);
+  const tableAppointments = filteredAppointments || appointments;
+
+  // PAGINATION STATE
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // PAGINATION LIMIT
+  const itemsPerPage = 5;
+
+  // PAGINATION TOTAL PAGES
+  const totalPages = Math.ceil(tableAppointments.length / itemsPerPage);
+
+  // PAGINATION SAFE PAGE
+  const safeCurrentPage = Math.min(currentPage, totalPages || 1);
+
+  // PAGINATION START INDEX
+  const startIndex = (safeCurrentPage - 1) * itemsPerPage;
+
+  // PAGINATION CURRENT DATA
+  const currentAppointments = tableAppointments.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  // PAGINATION PAGE NUMBERS
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  useEffect(() => {
+    if (appointments.length === 0) {
+      dispatch(fetchAdminAppointments());
+    }
+  }, [dispatch, appointments.length]);
+
+  // PAGINATION RESET WHEN FILTER DATA CHANGES
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [tableAppointments.length]);
 
   return (
-    <TableContainer variant="admin" className="min-w-0">
-      <div className="overflow-x-auto">
+    <TableContainer variant="admin" className="min-w-0 overflow-hidden">
+      <div className="overflow-x-auto custom-scrollbar">
         <table className="w-full min-w-[1200px] text-left border-collapse">
-          <thead>
-            <tr className="bg-surface-container-low border-b border-outline-variant">
+          <thead className="bg-slate-50">
+            <tr className="border-b border-outline-variant/30">
               <th className="px-6 py-4 font-label-md text-on-surface-variant whitespace-nowrap">
                 Patient
               </th>
@@ -123,165 +75,162 @@ useEffect(() => {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-100">
-            {appointments.map((item) => (
-              <tr
-                key={item.patientId}
-                className="hover:bg-blue-50/30 transition-colors group"
-              >
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-3 whitespace-nowrap">
-                    {item.patientAvatar ? (
-                      <img
-                        src={item.patientAvatar}
-                        alt={item.patient}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${item.patientBg}`}
-                      >
-                        {item.patientInitial}
-                      </div>
-                    )}
+          <tbody className="divide-y divide-outline-variant/20">
+            {currentAppointments.length > 0 ? (
+              currentAppointments.map((item, index) => (
+                <tr
+                  key={`${item.patientId}-${startIndex + index}`}
+                  className="odd:bg-white even:bg-slate-50/40 hover:bg-blue-50/50 transition-colors group"
+                >
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-3 whitespace-nowrap">
+                      {item.patientAvatar ? (
+                        <img
+                          src={item.patientAvatar}
+                          alt={item.patient}
+                          className="w-10 h-10 rounded-full border border-slate-100 object-cover shadow-sm"
+                        />
+                      ) : (
+                        <div
+                          className={`w-10 h-10 rounded-full flex items-center justify-center text-[13px] font-semibold ${item.patientBg}`}
+                        >
+                          {item.patientInitial}
+                        </div>
+                      )}
 
-                    <div>
-                      <p className="font-label-md text-on-surface">
-                        {item.patient}
-                      </p>
-                      <p className="text-[11px] text-gray-500">
-                        ID: {item.patientId}
+                      <div>
+                        <p className="text-[14px] font-medium text-on-surface">
+                          {item.patient}
+                        </p>
+                        <p className="text-[12px] text-on-surface-variant">
+                          ID: {item.patientId}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-2 whitespace-nowrap">
+                      {item.doctorAvatar ? (
+                        <img
+                          src={item.doctorAvatar}
+                          alt={item.doctor}
+                          className="w-8 h-8 rounded-full border border-slate-100 object-cover shadow-sm"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[11px] font-semibold">
+                          {item.doctorInitial}
+                        </div>
+                      )}
+
+                      <p className="text-[13px] text-on-surface">
+                        {item.doctor}
                       </p>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-2 whitespace-nowrap">
-                    {item.doctorAvatar ? (
-                      <img
-                        src={item.doctorAvatar}
-                        alt={item.doctor}
-                        className="w-7 h-7 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">
-                        {item.doctorInitial}
-                      </div>
-                    )}
-
-                    <p className="font-body-md text-on-surface">
-                      {item.doctor}
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <p className="text-[13px] text-on-surface">{item.date}</p>
+                    <p className="text-[12px] text-on-surface-variant">
+                      {item.time}
                     </p>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <p className="font-body-md text-on-surface">{item.date}</p>
-                  <p className="font-body-sm text-on-surface-variant">
-                    {item.time}
-                  </p>
-                </td>
-
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${item.typeClass}`}
-                  >
-                    {item.type}
-                  </span>
-                </td>
-
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center gap-1.5">
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`material-symbols-outlined text-lg ${item.paymentIconClass}`}
+                      className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium ${item.typeClass}`}
                     >
-                      {item.paymentIcon}
+                      {item.type}
                     </span>
-                    <span className="font-body-md text-on-surface">
-                      {item.payment}
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className={`material-symbols-outlined text-[18px] ${item.paymentIconClass}`}
+                      >
+                        {item.paymentIcon}
+                      </span>
+                      <span className="text-[13px] text-on-surface">
+                        {item.payment}
+                      </span>
+                    </div>
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium ${item.statusClass}`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${item.dotClass}`}
+                      ></span>
+                      {item.status}
                     </span>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${item.statusClass}`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${item.dotClass}`}></span>
-                    {item.status}
-                  </span>
-                </td>
-
-                <td className="px-6 py-4 text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    <button className="p-1.5 hover:bg-white rounded-lg border border-transparent hover:border-outline-variant text-on-surface-variant">
-                      <span className="material-symbols-outlined text-xl">
-                        edit
-                      </span>
-                    </button>
-
-                    {/* <button className="p-1.5 hover:bg-white rounded-lg border border-transparent hover:border-outline-variant text-on-surface-variant">
-                      <span className="material-symbols-outlined text-xl">
-                        visibility
-                      </span>
-                    </button> */}
-
-                    {/* <button className="p-1.5 hover:bg-error-container/20 rounded-lg border border-transparent hover:border-error/20 text-error">
-                      <span className="material-symbols-outlined text-xl">
-                        delete
-                      </span>
-                    </button> */}
-                  </div>
+                  <td className="px-6 py-4 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <button className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+                        <span className="material-symbols-outlined text-[18px]">
+                          edit
+                        </span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="7"
+                  className="px-6 py-8 text-center text-[14px] text-on-surface-variant"
+                >
+                  No appointments found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      <div className="px-4 py-4 sm:px-6 bg-surface-container-low border-t border-outline-variant flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <p className="font-body-sm text-on-surface-variant">
-          Showing <span className="font-semibold text-on-surface">1</span> of{" "}
-          <span className="font-semibold text-on-surface">156</span> results
-        </p>
-
-        <div className="flex items-center gap-2">
-          <button
-            disabled
-            className="p-2 border border-outline-variant rounded-lg hover:bg-white transition-colors disabled:opacity-50"
-          >
-            <span className="material-symbols-outlined text-lg">
-              chevron_left
-            </span>
-          </button>
-
-          {[1, 2, 3].map((page) => (
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <div className="px-4 py-4 sm:px-6 bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-end">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <button
-              key={page}
-              className={`w-8 h-8 flex items-center justify-center rounded-lg font-label-sm ${
-                page === 1
-                  ? "bg-primary text-on-primary"
-                  : "hover:bg-white border border-transparent hover:border-outline-variant text-on-surface-variant"
-              }`}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={safeCurrentPage === 1}
+              className="inline-flex items-center justify-center rounded-lg border border-outline-variant/40 bg-white px-3 py-2 text-[13px] font-medium text-on-surface-variant hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {page}
+              Previous
             </button>
-          ))}
 
-          <span className="text-on-surface-variant">...</span>
+            {pageNumbers.map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`inline-flex h-9 min-w-9 items-center justify-center rounded-lg px-3 text-[13px] font-medium transition-colors ${
+                  safeCurrentPage === page
+                    ? "bg-primary text-on-primary shadow-sm"
+                    : "border border-outline-variant/40 bg-white text-on-surface-variant hover:bg-slate-50"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
 
-          <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white border border-transparent hover:border-outline-variant text-on-surface-variant font-label-sm">
-            16
-          </button>
-
-          <button className="p-2 border border-outline-variant rounded-lg hover:bg-white transition-colors">
-            <span className="material-symbols-outlined text-lg">
-              chevron_right
-            </span>
-          </button>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={safeCurrentPage === totalPages}
+              className="inline-flex items-center justify-center rounded-lg border border-outline-variant/40 bg-white px-3 py-2 text-[13px] font-medium text-on-surface-variant hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </TableContainer>
   );
 };

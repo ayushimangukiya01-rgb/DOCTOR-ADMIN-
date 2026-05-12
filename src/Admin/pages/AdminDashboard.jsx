@@ -3,8 +3,7 @@ import React from "react";
 import AdminSummaryGrid from "../components/dashboard/AdminSummaryGrid";
 import RecentDoctorRequests from "../components/dashboard/RecentDoctorRequests";
 import TodayAppointments from "../components/dashboard/TodayAppointments";
-import QuickActions from "../components/dashboard/QuickActions";
-import PlatformActivity from "../components/dashboard/PlatformActivity";
+
 
 const AdminDashboard = () => {
   return (
@@ -22,19 +21,10 @@ const AdminDashboard = () => {
 
       <AdminSummaryGrid />
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-8">
-        {/* Left */}
-        <div className="xl:col-span-8 space-y-6 xl:space-y-8 min-w-0">
-          <RecentDoctorRequests />
-          <TodayAppointments />
-        </div>
-
-        {/* Right */}
-        <div className="xl:col-span-4 space-y-6 xl:space-y-8 min-w-0">
-          <QuickActions />
-          <PlatformActivity />
-        </div>
-      </div>
+     <div className="space-y-6 xl:space-y-8 w-full min-w-0">
+  <RecentDoctorRequests />
+  <TodayAppointments />
+</div>
     </div>
   );
 };

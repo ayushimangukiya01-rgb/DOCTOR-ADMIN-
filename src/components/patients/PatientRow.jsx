@@ -57,12 +57,7 @@ const PatientRow = ({ patient }) => {
             View Profile
           </button>
 
-          <button className="text-slate-400 hover:text-slate-700">
-            <span className="material-symbols-outlined text-[20px]">
-              more_vert
-            </span>
-          </button>
-
+         
         </div>
       </td>
 

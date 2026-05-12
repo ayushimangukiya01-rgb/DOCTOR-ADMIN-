@@ -6,7 +6,7 @@ import DoctorProfileSummary from "../components/verification/DoctorProfileSummar
 import ProfessionalSummary from "../components/verification/ProfessionalSummary";
 import SubmittedDocuments from "../components/verification/SubmittedDocuments";
 import ApprovalDecision from "../components/verification/ApprovalDecision";
-import AuditTimeline from "../components/verification/AuditTimeline";
+
 
 const DoctorVerificationDetail = () => {
   return (
@@ -26,7 +26,7 @@ const DoctorVerificationDetail = () => {
         </div>
       </div>
 
-      <AuditTimeline />
+     
     </div>
   );
 };

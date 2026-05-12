@@ -3,6 +3,7 @@ import UpcomingAppointmentRow from "../../common/display/UpcomingAppointmentRow"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchDoctorDashboard } from "../../redux/doctor/dashboard/doctorDashboardSlice";
+import { useNavigate } from "react-router-dom";
 // const appointments = [
 //   {
 //     id: "#4421",
@@ -32,6 +33,7 @@ import { fetchDoctorDashboard } from "../../redux/doctor/dashboard/doctorDashboa
 
 const UpcomingAppointments = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 const { upcomingAppointments } = useSelector(
   (state) => state.doctorDashboard
 );
@@ -49,7 +51,7 @@ useEffect(() => {
           Upcoming Appointments
         </h3>
 
-        <button className="text-[#004ac6] text-sm font-semibold hover:underline">
+        <button className="text-[#004ac6] text-sm font-semibold hover:underline" onClick={()=>navigate("/appointments")}>
           View All
         </button>
       </div>

@@ -1,22 +1,62 @@
 // src/Admin/components/payments/TransactionsTable.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TableContainer from "../../../common/layout/TableContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdminPayments } from "../../../redux/admin/payments/paymentSlice";
 
-const TransactionsTable = () => {
+const TransactionsTable = ({
+  searchTerm,
+  setSearchTerm,
+  status,
+  setStatus,
+  department,
+  setDepartment,
+  departments,
+  filteredTransactions,
+}) => {
   const dispatch = useDispatch();
-const { transactions } = useSelector((state) => state.adminPayments);
+  const { transactions } = useSelector((state) => state.adminPayments);
 
-useEffect(() => {
-  if (transactions.length === 0) {
-    dispatch(fetchAdminPayments());
-  }
-}, [dispatch, transactions.length]);
+  const tableTransactions = filteredTransactions || transactions;
+
+  // PAGINATION STATE
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // PAGINATION LIMIT
+  const itemsPerPage = 5;
+
+  // PAGINATION TOTAL PAGES
+  const totalPages = Math.ceil(tableTransactions.length / itemsPerPage);
+
+  // PAGINATION SAFE PAGE
+  const safeCurrentPage = Math.min(currentPage, totalPages || 1);
+
+  // PAGINATION START INDEX
+  const startIndex = (safeCurrentPage - 1) * itemsPerPage;
+
+  // PAGINATION CURRENT DATA
+  const currentTransactions = tableTransactions.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  // PAGINATION PAGE NUMBERS
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  useEffect(() => {
+    if (transactions.length === 0) {
+      dispatch(fetchAdminPayments());
+    }
+  }, [dispatch, transactions.length]);
+
+  // PAGINATION RESET WHEN FILTER DATA CHANGES
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [tableTransactions.length]);
 
   return (
-    <TableContainer variant="admin" className="min-w-0">
-      <div className="p-5 sm:p-6 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <TableContainer variant="admin" className="min-w-0 overflow-hidden">
+      <div className="p-5 sm:p-6 border-b border-gray-100 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <h3 className="font-h3 text-h3 text-on-surface">Transactions</h3>
           <p className="text-body-sm text-secondary">
@@ -24,164 +64,205 @@ useEffect(() => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-          <button className="px-4 py-2 border border-outline-variant rounded-lg text-label-md flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-            <span className="material-symbols-outlined text-lg">
-              filter_list
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full xl:w-auto">
+          {/* SEARCH */}
+          <div className="relative w-full sm:w-[260px]">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[20px]">
+              search
             </span>
-            Filter
-          </button>
 
-          <button className="px-4 py-2 bg-primary text-white rounded-lg text-label-md flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-transform">
-            <span className="material-symbols-outlined text-lg">download</span>
-            Export CSV
-          </button>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search transactions..."
+              className="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg bg-white text-[13px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+
+          {/* STATUS FILTER */}
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="w-full sm:w-auto px-4 py-2 border border-outline-variant rounded-lg bg-white text-[13px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
+          >
+            <option>All Status</option>
+            <option>COMPLETED</option>
+            <option>PENDING</option>
+            <option>FAILED</option>
+          </select>
+
+          {/* DEPARTMENT FILTER */}
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            className="w-full sm:w-auto px-4 py-2 border border-outline-variant rounded-lg bg-white text-[13px] text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
+          >
+            <option>All Departments</option>
+            {departments.map((item) => (
+              <option key={item}>{item}</option>
+            ))}
+          </select>
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto custom-scrollbar">
         <table className="w-full min-w-[1050px] text-left border-collapse">
-          <thead>
-            <tr className="bg-surface-container-low/50">
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+          <thead className="bg-slate-50">
+            <tr className="border-b border-outline-variant/30">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Date
               </th>
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Doctor
               </th>
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Patient
               </th>
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Amount
               </th>
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Commission
               </th>
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Status
               </th>
-              <th className="px-6 py-4 font-label-md text-secondary border-b border-gray-100 whitespace-nowrap">
+              <th className="px-6 py-4 font-label-md text-secondary whitespace-nowrap">
                 Actions
               </th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-50">
-            {transactions.map((item) => (
-              <tr
-                key={`${item.patientId}-${item.time}`}
-                className="hover:bg-blue-50/30 transition-colors"
-              >
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="font-body-md text-on-surface">
-                    {item.date}
-                  </div>
-                  <div className="text-[11px] text-secondary">{item.time}</div>
-                </td>
-
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary font-bold text-xs">
-                      {item.doctorInitial}
+          <tbody className="divide-y divide-outline-variant/20">
+            {currentTransactions.length > 0 ? (
+              currentTransactions.map((item, index) => (
+                <tr
+                  key={`${item.patientId}-${item.time}-${startIndex + index}`}
+                  className="odd:bg-white even:bg-slate-50/40 hover:bg-blue-50/50 transition-colors"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-[13px] font-medium text-on-surface">
+                      {item.date}
                     </div>
-                    <div>
-                      <div className="font-label-md text-on-surface">
-                        {item.doctor}
+                    <div className="text-[11px] text-secondary">
+                      {item.time}
+                    </div>
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-primary font-semibold text-[12px]">
+                        {item.doctorInitial}
                       </div>
-                      <div className="text-[11px] text-secondary">
-                        {item.department}
+
+                      <div>
+                        <div className="text-[13px] font-medium text-on-surface">
+                          {item.doctor}
+                        </div>
+                        <div className="text-[11px] text-secondary">
+                          {item.department}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="font-body-md text-on-surface">
-                    {item.patient}
-                  </div>
-                  <div className="text-[11px] text-secondary">
-                    {item.patientId}
-                  </div>
-                </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-[13px] text-on-surface">
+                      {item.patient}
+                    </div>
+                    <div className="text-[11px] text-secondary">
+                      {item.patientId}
+                    </div>
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="font-label-md text-on-surface">
-                    {item.amount}
-                  </div>
-                </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-[13px] font-semibold text-on-surface">
+                      {item.amount}
+                    </div>
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="font-body-md text-secondary">
-                    {item.commission}{" "}
-                    <span className="text-[10px] bg-secondary-container px-1 rounded">
-                      {item.rate}
-                    </span>
-                  </div>
-                </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-[13px] text-secondary">
+                      {item.commission}{" "}
+                      <span className="text-[10px] bg-secondary-container px-1.5 py-0.5 rounded">
+                        {item.rate}
+                      </span>
+                    </div>
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${item.statusClass}`}
-                  >
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`w-1.5 h-1.5 rounded-full ${item.dotClass}`}
-                    ></span>
-                    {item.status}
-                  </span>
-                </td>
-
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <button className="p-1.5 hover:bg-white rounded-lg transition-all text-secondary">
-                    <span className="material-symbols-outlined">
-                      more_vert
+                      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold ${item.statusClass}`}
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full ${item.dotClass}`}
+                      ></span>
+                      {item.status}
                     </span>
-                  </button>
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+                      <span className="material-symbols-outlined text-[18px]">
+                        more_vert
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="7"
+                  className="px-6 py-8 text-center text-[14px] text-secondary"
+                >
+                  No transactions found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      <div className="p-5 sm:p-6 border-t border-gray-100 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <p className="text-body-sm text-secondary">
-          Showing <span className="font-bold text-on-surface">1-10</span> of
-          248 transactions
-        </p>
-
-        <div className="flex items-center gap-2">
-          <button
-            disabled
-            className="p-2 border border-outline-variant rounded-lg text-secondary hover:bg-gray-50 disabled:opacity-30"
-          >
-            <span className="material-symbols-outlined">chevron_left</span>
-          </button>
-
-          {[1, 2, 3].map((page) => (
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <div className="p-5 sm:p-6 border-t border-outline-variant/20 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-end bg-surface-container-lowest">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <button
-              key={page}
-              className={`px-3.5 py-1.5 rounded-lg font-label-md ${
-                page === 1
-                  ? "bg-primary text-white"
-                  : "text-secondary hover:bg-gray-50"
-              }`}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={safeCurrentPage === 1}
+              className="inline-flex items-center justify-center rounded-lg border border-outline-variant/40 bg-white px-4 py-2 text-[13px] font-medium text-secondary hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {page}
+              Previous
             </button>
-          ))}
 
-          <span className="px-1 text-secondary">...</span>
+            {pageNumbers.map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`inline-flex h-9 min-w-9 items-center justify-center rounded-lg px-3 text-[13px] font-medium transition-colors ${
+                  safeCurrentPage === page
+                    ? "bg-primary text-white shadow-sm"
+                    : "border border-outline-variant/40 bg-white text-secondary hover:bg-slate-50"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
 
-          <button className="px-3.5 py-1.5 text-secondary hover:bg-gray-50 rounded-lg font-label-md">
-            25
-          </button>
-
-          <button className="p-2 border border-outline-variant rounded-lg text-secondary hover:bg-gray-50">
-            <span className="material-symbols-outlined">chevron_right</span>
-          </button>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={safeCurrentPage === totalPages}
+              className="inline-flex items-center justify-center rounded-lg border border-outline-variant/40 bg-white px-4 py-2 text-[13px] font-medium text-secondary hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </TableContainer>
   );
 };
