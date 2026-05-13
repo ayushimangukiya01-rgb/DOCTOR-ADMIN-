@@ -1117,21 +1117,18 @@
     }
   ],
 "revenueChart": [
-  { "month": "May", "height": "h-28" },
-  { "month": "Jun", "height": "h-36" },
-  { "month": "Jul", "height": "h-32" },
-  { "month": "Aug", "height": "h-56" },
-  {
-    "month": "Sep",
-    "height": "h-48",
-    "active": true,
-    "tooltip": "$2,100.00"
-  },
-  {
-    "month": "Oct",
-    "height": "h-24",
-    "dashed": true
-  }
+  { "month": "Jan", "amount": 900,"active": true },
+  { "month": "Feb", "amount": 1200 ,"active": true},
+  { "month": "Mar", "amount": 1500 ,"active": true},
+  { "month": "Apr", "amount": 1100 ,"active": true},
+  { "month": "May", "amount": 1200 ,"active": true},
+  { "month": "Jun", "amount": 1800 ,"active": true},
+  { "month": "Jul", "amount": 1600,"active": true },
+  { "month": "Aug", "amount": 2800 ,"active": true},
+  { "month": "Sep", "amount": 2100, "active": true },
+  { "month": "Oct", "amount": 900, "active": true },
+  { "month": "Nov", "amount": 1700,"active": true },
+  { "month": "Dec", "amount": 100 ,"active": true}
 ],
 "transactions": [
   {
@@ -1139,6 +1136,43 @@
     "patient": "Jane Doe",
     "type": "Tele-consultation",
     "reference": "TXN-90210-A",
+    "amount": "$120.00",
+    "status": "PAID",
+    "statusClass": "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",
+    "initials": "JD",
+    "avatarBg": "bg-blue-50",
+    "avatarText": "text-blue-600"
+  },
+   {
+    "date": "Oct 12, 2023",
+    "patient": "Jane Doe",
+    "type": "Tele-consultation",
+    "reference": "TXN-96240-A",
+    "amount": "$120.00",
+    "status": "PAID",
+    "statusClass": "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",
+    "initials": "JD",
+    "avatarBg": "bg-blue-50",
+    "avatarText": "text-blue-600"
+  },
+  
+   {
+    "date": "Oct 12, 2023",
+    "patient": "Jane Doe",
+    "type": "Tele-consultation",
+    "reference": "TXN-91210-A",
+    "amount": "$120.00",
+    "status": "PAID",
+    "statusClass": "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",
+    "initials": "JD",
+    "avatarBg": "bg-blue-50",
+    "avatarText": "text-blue-600"
+  },
+   {
+    "date": "Oct 12, 2023",
+    "patient": "Jane Doe",
+    "type": "Tele-consultation",
+    "reference": "TXN-98210-A",
     "amount": "$120.00",
     "status": "PAID",
     "statusClass": "bg-[#006e2f]/10 text-[#006e2f] border-[#006e2f]/20",

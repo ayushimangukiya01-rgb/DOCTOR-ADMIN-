@@ -5,9 +5,15 @@ const DayStatusLabel = ({ day, status = "Active" }) => {
     <div className="w-32 pt-2 shrink-0">
       <span className="font-bold text-slate-900">{day}</span>
 
-      <div className="text-xs text-[#006e2f] mt-1 font-semibold uppercase tracking-wider">
-        {status}
-      </div>
+     <p
+  className={`text-sm font-bold uppercase tracking-wide ${
+    status === "Leave"
+      ? "text-red-500"
+      : "text-[#006e2f]"
+  }`}
+>
+  {status}
+</p>
     </div>
   );
 };
